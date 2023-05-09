@@ -20,7 +20,7 @@
 #include "dht.h"
 
 
-#define ONE_WIRE_GPIO 4
+#define ONE_WIRE_GPIO 2
 
 
 static const gpio_num_t dht_gpio = ONE_WIRE_GPIO;
