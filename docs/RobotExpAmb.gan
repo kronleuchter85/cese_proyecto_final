@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Robot_Exp_Amb" company="" webLink="http://" view-date="2023-04-01" view-index="0" gantt-divider-location="500" resource-divider-location="300" version="3.2.3247" locale="en_GB">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Name" width="280" order="0"/>
+        <field id="tpd4" name="Begin date" width="112" order="1"/>
+        <field id="tpd5" name="End date" width="107" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="52" name="Inicio" color="#8cb6ce" meeting="false" start="2023-04-02" duration="2" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+            <depend id="10" type="2" difference="0" hardness="Strong"/>
+            <depend id="31" type="2" difference="0" hardness="Strong"/>
+            <depend id="33" type="2" difference="0" hardness="Strong"/>
+            <depend id="44" type="2" difference="0" hardness="Strong"/>
+            <depend id="46" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="2" name="Investigacion y prototipado" color="#000000" meeting="false" start="2023-04-04" duration="70" complete="0" thirdDate="2023-04-24" thirdDate-constraint="0" expand="false">
+            <depend id="5" type="2" difference="0" hardness="Strong"/>
+            <task id="10" name="POC de plataforma base" color="#8cb6ce" meeting="false" start="2023-04-04" duration="10" complete="0" thirdDate="2023-03-21" thirdDate-constraint="0" expand="false">
+                <depend id="11" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="11" name="POC e integración de sensor de temperatura y humedad en plataforma base" color="#8cb6ce" meeting="false" start="2023-04-14" duration="10" complete="0" thirdDate="2023-03-21" thirdDate-constraint="0" expand="true">
+                <depend id="12" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="12" name="POC e integración de sensor de luminosidad" color="#8cb6ce" meeting="false" start="2023-04-24" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="13" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="13" name="POC e integración de sensor de presión ambiental" color="#8cb6ce" meeting="false" start="2023-05-04" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="14" name="POC e integración de motores en plataforma base" color="#8cb6ce" meeting="false" start="2023-05-14" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="15" name="POC e integración de joystick" color="#8cb6ce" meeting="false" start="2023-05-24" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="16" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="16" name="POC e integración de display" color="#8cb6ce" meeting="false" start="2023-06-03" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="20" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="5" name="Diseño y desarrollo de funcionalidades" color="#8cb6ce" meeting="false" start="2023-06-13" duration="71" complete="0" thirdDate="2023-03-21" thirdDate-constraint="0" expand="false">
+            <task id="20" name="Diseño del framework de orquestascion de componentes" color="#8cb6ce" meeting="false" start="2023-06-13" duration="10" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="21" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="21" name="Desarrollo de funcionalidad de medición de temperatura y humedad" color="#8cb6ce" meeting="false" start="2023-06-23" duration="8" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="22" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="22" name="Desarrollo de funcionalidad de medición de presión ambiental" color="#8cb6ce" meeting="false" start="2023-07-01" duration="9" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="26" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="26" name="Desarrollo de funcionalidad de escritura y formato de valores en el display" color="#8cb6ce" meeting="false" start="2023-07-10" duration="10" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="25" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="25" name="Desarrollo de funcionalidad de medicion de comandos en el joystick analógico" color="#8cb6ce" meeting="false" start="2023-07-20" duration="10" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="24" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="24" name="Desarrollo de funcionalidad de medición de desplazamiento" color="#8cb6ce" meeting="false" start="2023-07-30" duration="12" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="23" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="23" name="Desarrollo de funcionalidad de medición de luminosidad" color="#8cb6ce" meeting="false" start="2023-08-11" duration="12" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="27" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="6" name="Testing" meeting="false" start="2023-08-23" duration="40" complete="0" expand="false">
+            <task id="27" name="tests de integración de sensores" color="#8cb6ce" meeting="false" start="2023-08-23" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="28" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="28" name="tests de integración de display" color="#8cb6ce" meeting="false" start="2023-09-02" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="29" name="tests de integración de joystick" color="#8cb6ce" meeting="false" start="2023-09-12" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="true">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="30" name="tests de integración de motores" color="#8cb6ce" meeting="false" start="2023-09-22" duration="10" complete="0" thirdDate="2023-03-20" thirdDate-constraint="0" expand="false"/>
+        </task>
+        <task id="7" name="Ensamblado del hardware" color="#8cb6ce" meeting="false" start="2023-04-04" duration="32" complete="0" thirdDate="2023-03-21" thirdDate-constraint="0" expand="false">
+            <task id="31" name="joystick" color="#8cb6ce" meeting="false" start="2023-04-04" duration="14" complete="0" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true">
+                <depend id="32" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="32" name="robot" color="#8cb6ce" meeting="false" start="2023-04-18" duration="18" complete="0" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="9" name="Documentación" color="#8cb6ce" meeting="false" start="2023-04-04" duration="68" complete="0" thirdDate="2023-03-21" thirdDate-constraint="0" expand="true">
+            <task id="33" name="manual de usuario" color="#8cb6ce" meeting="false" start="2023-04-04" duration="10" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="34" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="34" name="documentación de arquitectura técnica del sistema" color="#8cb6ce" meeting="false" start="2023-04-14" duration="10" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="35" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="35" name="documentación técnica de diseño de software" color="#8cb6ce" meeting="false" start="2023-04-24" duration="10" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="36" name="documentación técnica de diseño de hardware" color="#8cb6ce" meeting="false" start="2023-05-04" duration="10" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="37" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="37" name="video demostrativo de uso" color="#8cb6ce" meeting="false" start="2023-05-14" duration="6" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="38" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="38" name="informe de avance" color="#8cb6ce" meeting="false" start="2023-05-20" duration="6" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="39" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="39" name="memoria final" color="#8cb6ce" meeting="false" start="2023-05-26" duration="16" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="3" name="Set-up ambiente de integración continua" color="#8cb6ce" meeting="false" start="2023-06-11" duration="15" complete="0" thirdDate="2023-03-21" thirdDate-constraint="0" expand="true">
+            <task id="17" name="Set-up imagen Docker con codigo de proyecto" color="#8cb6ce" meeting="false" start="2023-06-11" duration="5" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="18" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="18" name="Set-up servicio de integración continua cloud" color="#8cb6ce" meeting="false" start="2023-06-16" duration="5" complete="0" thirdDate="2023-03-06" thirdDate-constraint="0" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="19" name="Configuracion con Github para tomar los commits y ejecutar los builds" color="#8cb6ce" meeting="false" start="2023-06-21" duration="5" complete="0" thirdDate="2023-03-16" thirdDate-constraint="0" expand="true">
+                <depend id="40" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="8" name="Funcionalidades extras (actividad opcional)" meeting="false" start="2023-06-26" duration="50" complete="0" expand="true">
+            <task id="40" name="POC comunicación inalámbrica" color="#8cb6ce" meeting="false" start="2023-06-26" duration="25" complete="0" thirdDate="2023-03-27" thirdDate-constraint="0" expand="true">
+                <depend id="41" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="41" name="POC dispositivo de video camara integrada" color="#8cb6ce" meeting="false" start="2023-07-21" duration="25" complete="0" thirdDate="2023-03-27" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="43" name="Adquisicion de materiales" meeting="false" start="2023-04-04" duration="20" complete="0" expand="true">
+            <task id="44" name="Analisis y seleccion de materiales y proveedores" color="#8cb6ce" meeting="false" start="2023-04-04" duration="10" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true">
+                <depend id="45" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="45" name="Compra de materiales" color="#8cb6ce" meeting="false" start="2023-04-14" duration="10" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="42" name="Gestion del proyecto" meeting="false" start="2023-04-04" duration="180" complete="0" expand="true">
+            <task id="46" name="Definicion de alcance, funcionalidades e historias de usuario" color="#8cb6ce" meeting="false" start="2023-04-04" duration="6" complete="0" thirdDate="2023-04-04" thirdDate-constraint="0" expand="true">
+                <depend id="47" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="47" name="Armado del plan de actividades y tareas" color="#8cb6ce" meeting="false" start="2023-04-10" duration="5" complete="0" thirdDate="2023-04-05" thirdDate-constraint="0" expand="true">
+                <depend id="48" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="48" name="Reconocimiento de riesgos" color="#8cb6ce" meeting="false" start="2023-04-15" duration="6" complete="0" thirdDate="2023-04-15" thirdDate-constraint="0" expand="true">
+                <depend id="49" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="49" name="Definicion de proceso de calidad" color="#8cb6ce" meeting="false" start="2023-04-21" duration="6" complete="0" thirdDate="2023-04-21" thirdDate-constraint="0" expand="true">
+                <depend id="50" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="50" name="Confeccion de documentacion de planificacion del proyecto" color="#8cb6ce" meeting="false" start="2023-04-27" duration="7" complete="0" thirdDate="2023-04-08" thirdDate-constraint="0" expand="true">
+                <depend id="51" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="51" name="Seguimiento y control de hitos, desvios y riesgos" color="#8cb6ce" meeting="false" start="2023-05-04" duration="150" complete="0" thirdDate="2023-04-11" thirdDate-constraint="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Gonzalo" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
