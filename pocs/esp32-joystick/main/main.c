@@ -17,12 +17,12 @@
 #define NO_OF_SAMPLES   64          //Multisampling
 
 
-adc_channel_t channel_x = ADC2_CHANNEL_1;      // ADC1:GPIO36, ADC2:GPIO4
+adc_channel_t channel_x = ADC2_CHANNEL_1;      // GPIO 0
 adc_unit_t unit_x = ADC_UNIT_2;               // ADC2
 adc_atten_t atten_x = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
 
 
-adc_channel_t channel_y = ADC1_CHANNEL_7;      // ADC1:GPIO36, ADC2:GPIO4
+adc_channel_t channel_y = ADC1_CHANNEL_7;      // GPIO 35
 adc_unit_t unit_y = ADC_UNIT_1;               // ADC2
 adc_atten_t atten_y = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
 
@@ -51,7 +51,10 @@ void app_main(void)
         int adc_reading_y = 0;
         adc_reading_y =  adc1_get_raw((adc1_channel_t)channel_y);
         int voltage_y = esp_adc_cal_raw_to_voltage(adc_reading_y, &adc1_chars_y);
-
+        
+        // ESP_LOGI(TAG, " (%i , %i) ", adc_reading_x , adc_reading_y);
+        // ESP_LOGI(TAG, " (%i , %i) ", voltage_x , voltage_y);
+        
         float normalized_x = voltage_x / 1000;
         float normalized_y = voltage_y / 1000;
 

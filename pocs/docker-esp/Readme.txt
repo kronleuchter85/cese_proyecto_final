@@ -20,7 +20,14 @@ docker build --tag esp_custom_building .
 #
 docker run --rm -v $PWD/<PROJECTO A BUILDEAR>:/project esp_custom_building idf.py build
 
+docker run --rm -v $PWD/esp32-bmp280:/project esp_gonzalo_building idf.py build
+docker run --rm -v $PWD/esp32-joystick:/project esp_gonzalo_building idf.py build
+docker run --rm -v $PWD/esp32-dht11:/project esp_gonzalo_building idf.py build
+docker run --rm -v $PWD/esp32-photoresistor:/project esp_gonzalo_building idf.py build
+
+
 #
 # y flashear usando 
 #
 docker run --rm --device=/dev/ttyUSB0 -v $PWD/esp32-bmp280:/project esp_gonzalo_building idf.py flash --port /dev/ttyUSB0
+docker run --rm --device=/dev/ttyUSB0 -v $PWD/esp32-joystick:/project esp_gonzalo_building idf.py flash --port /dev/ttyUSB0
