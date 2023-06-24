@@ -8,4 +8,4 @@ set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/../esp-idf-lib/components )
 # set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common $ENV{IDF_PATH}/../esp-idf-lib/components)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(esp32-bmp280)
+project(esp32-integracion)

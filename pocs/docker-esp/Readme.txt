@@ -24,6 +24,7 @@ docker run --rm -v $PWD/esp32-bmp280:/project esp_gonzalo_building idf.py build
 docker run --rm -v $PWD/esp32-joystick:/project esp_gonzalo_building idf.py build
 docker run --rm -v $PWD/esp32-dht11:/project esp_gonzalo_building idf.py build
 docker run --rm -v $PWD/esp32-photoresistor:/project esp_gonzalo_building idf.py build
+docker run --rm -v $PWD/esp32-integracion:/project esp_gonzalo_building idf.py build
 
 
 #
