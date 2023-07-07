@@ -12,7 +12,9 @@ services:
     # depends_on: 
     #   - app_tests
     image: cese/esp32-display
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
     volumes:
       - .:/project
-    command: idf.py clean build
+    command: idf.py clean build flash --port /dev/ttyUSB0
   
