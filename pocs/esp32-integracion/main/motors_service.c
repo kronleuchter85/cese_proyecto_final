@@ -10,12 +10,17 @@
 #include "esp_attr.h"
 
 
-void motors_initialize(mcpwm_unit_t unit_to_use , mcpwm_timer_t timer_to_use , int gpio_pin_A , int gpio_pin_b){
+void motors_initialize(mcpwm_unit_t unit_to_use , mcpwm_timer_t timer_to_use ,int gpio_pin_A , int gpio_pin_b){
 
   // 1. mcpwm gpio initialization
   printf("initializing mcpwm gpio...\n");
-  mcpwm_gpio_init(unit_to_use, MCPWM0A, gpio_pin_A);
-  mcpwm_gpio_init(unit_to_use, MCPWM0B, gpio_pin_b);
+  if(unit_to_use == MCPWM_UNIT_0){
+    mcpwm_gpio_init(unit_to_use, MCPWM0A, gpio_pin_A);
+    mcpwm_gpio_init(unit_to_use, MCPWM0B, gpio_pin_b);
+  }else if(unit_to_use ==MCPWM_UNIT_1){
+    mcpwm_gpio_init(unit_to_use, MCPWM1A, gpio_pin_A);
+    mcpwm_gpio_init(unit_to_use, MCPWM1B, gpio_pin_b);
+  }
 
   // 2. initial mcpwm configuration
   printf("Configuring Initial Parameters of mcpwm...\n");

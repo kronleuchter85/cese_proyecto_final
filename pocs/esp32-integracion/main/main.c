@@ -16,8 +16,10 @@
 // 
 // Motors configuration
 // 
-#define GPIO_PWM0A_OUT 26   
-#define GPIO_PWM0B_OUT 27   
+#define GPIO_MCPWM0_A_OUT 26   
+#define GPIO_MCPWM0_B_OUT 27   
+#define GPIO_MCPWM1_A_OUT 33   
+#define GPIO_MCPWM1_B_OUT 25   
 
 
 static const char *TAG = "temp_collector";
@@ -62,7 +64,8 @@ static void motors_task(void *arg) {
 
     float duty_cicle_counter = 30.0;
 
-    motors_initialize(MCPWM_UNIT_0 , MCPWM_TIMER_0 , GPIO_PWM0A_OUT , GPIO_PWM0B_OUT);
+    motors_initialize(MCPWM_UNIT_0 , MCPWM_TIMER_0 , GPIO_MCPWM0_A_OUT , GPIO_MCPWM0_B_OUT);
+    motors_initialize(MCPWM_UNIT_1 , MCPWM_TIMER_1 , GPIO_MCPWM1_A_OUT , GPIO_MCPWM1_B_OUT);
 
     while (1){
 
@@ -75,18 +78,22 @@ static void motors_task(void *arg) {
         
         printf("Forward ...\n");
         motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+        motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
         vTaskDelay(5000 / portTICK_RATE_MS);
 
         printf("Stop ...\n");
         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
         vTaskDelay(2000 / portTICK_RATE_MS);
         
         printf("Backward ...\n");
         motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+        motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
         vTaskDelay(5000 / portTICK_RATE_MS);
         
         printf("Stop ...\n");
         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
         vTaskDelay(2000 / portTICK_RATE_MS);
         
         duty_cicle_counter = duty_cicle_counter + 10.0;
