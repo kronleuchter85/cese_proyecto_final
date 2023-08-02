@@ -11,7 +11,7 @@ services:
     build: .
     # depends_on: 
     #   - app_tests
-    image: cese/esp32-motor
+    image: cese/esp32-udp-server
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     volumes:

@@ -8,12 +8,12 @@
 #include "driver/mcpwm.h"
 #include "soc/mcpwm_periph.h"
 
-#define GPIO_PWM0A_OUT 15 // Set GPIO 15 as PWM0A
-#define GPIO_PWM0B_OUT 16 // Set GPIO 16 as PWM0B
+#define GPIO_PWM0A_OUT 26//15 // Set GPIO 15 as PWM0A
+#define GPIO_PWM0B_OUT 27//16 // Set GPIO 16 as PWM0B
 #define PUSH_BUTTON_PIN_SPEED 33
 
 int buttonState = 0;
-int count_value = 0;
+float duty_cicle_counter = 30.0;
 int prestate = 0;
 
 static void mcpwm_example_gpio_initialize(void)
@@ -70,32 +70,33 @@ static void mcpwm_example_brushed_motor_control(void *arg)
   pwm_config.duty_mode = MCPWM_DUTY_MODE_0;
   mcpwm_init(MCPWM_UNIT_0, MCPWM_TIMER_0, &pwm_config); // Configure PWM0A & PWM0B with above settings
 
-  brushed_motor_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, 20.0);
-  vTaskDelay(5000 / portTICK_RATE_MS);
-  brushed_motor_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, 20.0);
-  vTaskDelay(5000 / portTICK_RATE_MS);
-  brushed_motor_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-  vTaskDelay(2000 / portTICK_RATE_MS);
 
-  gpio_set_direction(PUSH_BUTTON_PIN_SPEED, GPIO_MODE_INPUT);
+  while (1){
 
-  while (1)
-  {
+    if(duty_cicle_counter > 60.0)
+      duty_cicle_counter = 30.0;
 
-    buttonState = gpio_get_level(PUSH_BUTTON_PIN_SPEED);
+    printf("---------------------------------------------------\n");
+    printf("duty_cycle = %.2f\n" , duty_cicle_counter);
+    printf("---------------------------------------------------\n");
+    printf("Forward ...\n");
+    brushed_motor_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+    vTaskDelay(5000 / portTICK_RATE_MS);
 
-    if (buttonState == 1 && prestate == 0)
-    {
-      count_value = count_value + 10;
-      float duty_cycle = count_value;
-      brushed_motor_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cycle);
-      prestate = 1;
-    }
-    else if (buttonState == 0)
-    {
-      prestate = 0;
-      brushed_motor_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-    }
+    printf("Stop ...\n");
+    brushed_motor_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+    vTaskDelay(2000 / portTICK_RATE_MS);
+    
+    printf("Backward ...\n");
+    brushed_motor_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+    vTaskDelay(5000 / portTICK_RATE_MS);
+    
+    printf("Stop ...\n");
+    brushed_motor_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+    vTaskDelay(2000 / portTICK_RATE_MS);
+    
+    duty_cicle_counter = duty_cicle_counter + 10.0;
+
     vTaskDelay(500 / portTICK_RATE_MS);
   }
 }
