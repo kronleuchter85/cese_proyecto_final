@@ -10,6 +10,14 @@
 #include "nvs_flash.h"
 
 #include "measuring_services.h"
+#include "motors_service.h"
+
+
+// 
+// Motors configuration
+// 
+#define GPIO_PWM0A_OUT 26   
+#define GPIO_PWM0B_OUT 27   
 
 
 static const char *TAG = "temp_collector";
@@ -48,10 +56,51 @@ static void measuring_task(void *pvParameters) {
     }
 }
 
+
+
+static void motors_task(void *arg) {
+
+    float duty_cicle_counter = 30.0;
+
+    motors_initialize(MCPWM_UNIT_0 , MCPWM_TIMER_0 , GPIO_PWM0A_OUT , GPIO_PWM0B_OUT);
+
+    while (1){
+
+        if(duty_cicle_counter > 60.0)
+        duty_cicle_counter = 30.0;
+
+        printf("---------------------------------------------------\n");
+        printf("duty_cycle = %.2f\n" , duty_cicle_counter);
+        printf("---------------------------------------------------\n");
+        
+        printf("Forward ...\n");
+        motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+        vTaskDelay(5000 / portTICK_RATE_MS);
+
+        printf("Stop ...\n");
+        motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        vTaskDelay(2000 / portTICK_RATE_MS);
+        
+        printf("Backward ...\n");
+        motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+        vTaskDelay(5000 / portTICK_RATE_MS);
+        
+        printf("Stop ...\n");
+        motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        vTaskDelay(2000 / portTICK_RATE_MS);
+        
+        duty_cicle_counter = duty_cicle_counter + 10.0;
+
+        vTaskDelay(500 / portTICK_RATE_MS);
+    }
+}
+
+
+
 void app_main(void)
 {
     ESP_ERROR_CHECK( nvs_flash_init() );
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    xTaskCreate(&measuring_task, "measuring_task", 4096, NULL, 5, NULL);
+    xTaskCreate(&motors_task, "motors_task", 4096, NULL, 5, NULL);
 }
