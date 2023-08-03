@@ -13,13 +13,11 @@
 #include "joystick_service.h"
 
 
-void app_main(void)
-{
+void joystick_task(void * args){
 
     joystick_initialize();
 
-    while (1) 
-    {
+    while (1) {
 
         float normalized_x ;
         float normalized_y ;
@@ -30,5 +28,12 @@ void app_main(void)
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
+}
 
+void app_main(void){
+
+    ESP_ERROR_CHECK( nvs_flash_init() );
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+
+    xTaskCreate(&joystick_task, "joystick_task", 4096, NULL, 5, NULL);
 }

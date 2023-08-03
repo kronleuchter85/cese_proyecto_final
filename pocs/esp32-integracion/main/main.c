@@ -11,6 +11,7 @@
 
 #include "measuring_services.h"
 #include "motors_service.h"
+#include "joystick_service.h"
 
 
 // 
@@ -59,8 +60,24 @@ static void measuring_task(void *pvParameters) {
 }
 
 
+void joystick_task(void * args){
 
-static void motors_task(void *arg) {
+    joystick_initialize();
+
+    while (1) {
+
+        float normalized_x ;
+        float normalized_y ;
+
+        joystick_get_reading(&normalized_x , &normalized_y);
+
+        ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", normalized_x , normalized_y);
+
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void motors_task(void *arg) {
 
     float duty_cicle_counter = 30.0;
 
@@ -104,10 +121,18 @@ static void motors_task(void *arg) {
 
 
 
-void app_main(void)
-{
+void app_main(void){
+    
     ESP_ERROR_CHECK( nvs_flash_init() );
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
+    //
+    // task del motor
+    //
     xTaskCreate(&motors_task, "motors_task", 4096, NULL, 5, NULL);
+
+    //
+    // task del joystick
+    //
+    xTaskCreate(&joystick_task, "joystick_task", 4096, NULL, 5, NULL);
 }
