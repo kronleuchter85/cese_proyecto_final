@@ -12,6 +12,7 @@
 #include "measuring_services.h"
 #include "motors_service.h"
 #include "joystick_service.h"
+#include "robot_position_state.h"
 
 
 // 
@@ -64,14 +65,16 @@ void joystick_task(void * args){
 
     joystick_initialize();
 
+    float reading_x ;
+    float reading_y ;
+
     while (1) {
 
-        float normalized_x ;
-        float normalized_y ;
+        joystick_get_reading(&reading_x , &reading_y);
 
-        joystick_get_reading(&normalized_x , &normalized_y);
+        robot_position_state_update(reading_x , reading_y);
 
-        ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", normalized_x , normalized_y);
+        ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", reading_x , reading_y);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
@@ -93,7 +96,45 @@ void motors_task(void *arg) {
         printf("duty_cycle = %.2f\n" , duty_cicle_counter);
         printf("---------------------------------------------------\n");
         
-        printf("Forward ...\n");
+        robot_position_t state = robot_position_state_get();
+
+        // switch (state)
+        // {
+        //     case MOVING_FORWARD:
+
+        //         printf("MOVING_FORWARD ...\n");
+        //         motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+        //         motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+        //         // vTaskDelay(5000 / portTICK_RATE_MS);
+
+        //         break;
+        //     case MOVING_BACKWARD:
+        //         printf("MOVING_BACKWARD ...\n");
+        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+        //         break;
+        
+        //     case ROTATE_LEFT:
+        //         printf("ROTATE_LEFT ...\n");
+        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+        //         break;
+        
+        //     case ROTATE_RIGHT:
+        //         printf("ROTATE_RIGHT ...\n");
+        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+        //         break;
+        
+        //     default:
+        //         printf("default ...\n");
+        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+        //         break;
+        // }
+
+
+        printf("MOVING_FORWARD ...\n");
         motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
         motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
         vTaskDelay(5000 / portTICK_RATE_MS);
@@ -122,7 +163,7 @@ void motors_task(void *arg) {
 
 
 void app_main(void){
-    
+
     ESP_ERROR_CHECK( nvs_flash_init() );
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 

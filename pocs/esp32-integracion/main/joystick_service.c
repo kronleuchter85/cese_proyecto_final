@@ -3,6 +3,7 @@
 #include <math.h>
 #include <inttypes.h>
 
+#include "joystick_service.h"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
 
@@ -16,6 +17,10 @@ adc_atten_t atten_y = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision ra
 
 static esp_adc_cal_characteristics_t adc1_chars_x;
 static esp_adc_cal_characteristics_t adc1_chars_y;
+
+
+void joystick_transform(float * x , float * y);
+
 
 void joystick_initialize(){
 
@@ -38,5 +43,28 @@ void joystick_get_reading(float * read_x , float * read_y){
     
     *read_x = voltage_x / 1000;
     *read_y = voltage_y / 1000;
+
+    joystick_transform(read_x , read_y);
 }
 
+
+
+//
+// private functions
+//
+
+void joystick_transform(float * x , float * y){
+    if(*x == 0.0)
+        *x = JOYSTICK_READING_MIN;
+    else if(*x == 2.0)
+        *x = JOYSTICK_READING_NEUTRAL;
+    else if(*x == 3.0)
+        *x = JOYSTICK_READING_MAX;
+
+    if(*y == 0.0)
+        *y = JOYSTICK_READING_MAX;
+    else if(*y == 2.0)
+        *y = JOYSTICK_READING_NEUTRAL;
+    else if( *y==3.0)
+        *y = JOYSTICK_READING_MIN;
+}
