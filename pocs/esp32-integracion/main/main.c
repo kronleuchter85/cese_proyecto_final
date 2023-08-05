@@ -90,7 +90,7 @@ void motors_task(void *arg) {
     while (1){
 
         if(duty_cicle_counter > 60.0)
-        duty_cicle_counter = 30.0;
+            duty_cicle_counter = 30.0;
 
         printf("---------------------------------------------------\n");
         printf("duty_cycle = %.2f\n" , duty_cicle_counter);
@@ -98,65 +98,38 @@ void motors_task(void *arg) {
         
         robot_position_t state = robot_position_state_get();
 
-        // switch (state)
-        // {
-        //     case MOVING_FORWARD:
+        switch (state)
+        {
+            case MOVING_FORWARD:
+                printf("MOVING_FORWARD ...\n");
+                motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+                motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                break;
+            case MOVING_BACKWARD:
+                printf("MOVING_BACKWARD ...\n");
+                motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+                motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                break;
+            case ROTATE_LEFT:
+                printf("ROTATE_LEFT ...\n");
+                motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+                motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                break;
+            case ROTATE_RIGHT:
+                printf("ROTATE_RIGHT ...\n");
+                motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
+                motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                break;
+            default:
+                printf("default ...\n");
+                motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+                motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+                break;
+        }
 
-        //         printf("MOVING_FORWARD ...\n");
-        //         motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
-        //         motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
-        //         // vTaskDelay(5000 / portTICK_RATE_MS);
+        // duty_cicle_counter = duty_cicle_counter + 10.0;
 
-        //         break;
-        //     case MOVING_BACKWARD:
-        //         printf("MOVING_BACKWARD ...\n");
-        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-        //         break;
-        
-        //     case ROTATE_LEFT:
-        //         printf("ROTATE_LEFT ...\n");
-        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-        //         break;
-        
-        //     case ROTATE_RIGHT:
-        //         printf("ROTATE_RIGHT ...\n");
-        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-        //         break;
-        
-        //     default:
-        //         printf("default ...\n");
-        //         motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-        //         motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-        //         break;
-        // }
-
-
-        printf("MOVING_FORWARD ...\n");
-        motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
-        motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
-        vTaskDelay(5000 / portTICK_RATE_MS);
-
-        printf("Stop ...\n");
-        motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-        motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-        vTaskDelay(2000 / portTICK_RATE_MS);
-        
-        printf("Backward ...\n");
-        motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
-        motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
-        vTaskDelay(5000 / portTICK_RATE_MS);
-        
-        printf("Stop ...\n");
-        motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-        motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-        vTaskDelay(2000 / portTICK_RATE_MS);
-        
-        duty_cicle_counter = duty_cicle_counter + 10.0;
-
-        vTaskDelay(500 / portTICK_RATE_MS);
+        // vTaskDelay(500 / portTICK_RATE_MS);
     }
 }
 
