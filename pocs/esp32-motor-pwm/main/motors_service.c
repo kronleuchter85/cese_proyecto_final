@@ -32,6 +32,7 @@ void motors_initialize(mcpwm_unit_t unit_to_use , mcpwm_timer_t timer_to_use ,in
   mcpwm_init(unit_to_use, timer_to_use, &pwm_config); // Configure PWM0A & PWM0B with above settings
 }
 
+
 void motors_forward(mcpwm_unit_t mcpwm_num, mcpwm_timer_t timer_num, float duty_cycle){
   mcpwm_set_signal_low(mcpwm_num, timer_num, MCPWM_OPR_B);
   mcpwm_set_duty(mcpwm_num, timer_num, MCPWM_OPR_A, duty_cycle);
@@ -39,6 +40,7 @@ void motors_forward(mcpwm_unit_t mcpwm_num, mcpwm_timer_t timer_num, float duty_
 }
 
 void motors_backward(mcpwm_unit_t mcpwm_num, mcpwm_timer_t timer_num, float duty_cycle){
+
   mcpwm_set_signal_low(mcpwm_num, timer_num, MCPWM_OPR_A);
   mcpwm_set_duty(mcpwm_num, timer_num, MCPWM_OPR_B, duty_cycle);
   mcpwm_set_duty_type(mcpwm_num, timer_num, MCPWM_OPR_B, MCPWM_DUTY_MODE_0); // call this each time, if operator was previously in low/high state

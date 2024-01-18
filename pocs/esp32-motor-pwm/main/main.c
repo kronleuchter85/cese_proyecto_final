@@ -12,6 +12,8 @@
 #include "driver/mcpwm.h"
 #include "soc/mcpwm_periph.h"
 
+#include "esp_attr.h"
+
 
 #include "motors_service.h"
 
@@ -43,11 +45,11 @@ void motors_task(void *arg) {
       motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
       motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
       vTaskDelay(5000 / portTICK_RATE_MS);
-
+      
       printf("Stop ...\n");
       motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
       motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
-      vTaskDelay(2000 / portTICK_RATE_MS);
+      vTaskDelay(5000 / portTICK_RATE_MS);
       
       printf("Backward ...\n");
       motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);

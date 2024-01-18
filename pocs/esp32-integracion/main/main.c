@@ -18,8 +18,12 @@
 // 
 // Motors configuration
 // 
+
+// left
 #define GPIO_MCPWM0_A_OUT 26   
 #define GPIO_MCPWM0_B_OUT 27   
+
+// right
 #define GPIO_MCPWM1_A_OUT 33   
 #define GPIO_MCPWM1_B_OUT 25   
 
@@ -92,9 +96,9 @@ void motors_task(void *arg) {
         if(duty_cicle_counter > 60.0)
             duty_cicle_counter = 30.0;
 
-        printf("---------------------------------------------------\n");
-        printf("duty_cycle = %.2f\n" , duty_cicle_counter);
-        printf("---------------------------------------------------\n");
+        // printf("---------------------------------------------------\n");
+        // printf("duty_cycle = %.2f\n" , duty_cicle_counter);
+        // printf("---------------------------------------------------\n");
         
         robot_position_t state = robot_position_state_get();
 
