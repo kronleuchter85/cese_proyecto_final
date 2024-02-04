@@ -86,7 +86,7 @@ void joystick_task(void * args){
 
 void motors_task(void *arg) {
 
-    float duty_cicle_counter = 30.0;
+    float duty_cicle_counter = 40.0;
 
     motors_initialize(MCPWM_UNIT_0 , MCPWM_TIMER_0 , GPIO_MCPWM0_A_OUT , GPIO_MCPWM0_B_OUT);
     motors_initialize(MCPWM_UNIT_1 , MCPWM_TIMER_1 , GPIO_MCPWM1_A_OUT , GPIO_MCPWM1_B_OUT);
@@ -94,7 +94,7 @@ void motors_task(void *arg) {
     while (1){
 
         if(duty_cicle_counter > 60.0)
-            duty_cicle_counter = 30.0;
+            duty_cicle_counter = 40.0;
 
         // printf("---------------------------------------------------\n");
         // printf("duty_cycle = %.2f\n" , duty_cicle_counter);
