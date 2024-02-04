@@ -28,7 +28,7 @@
 #endif
 #define CONFIG_EXAMPLE_IPV4
 #if defined(CONFIG_EXAMPLE_IPV4)
-#define HOST_IP_ADDR "192.168.0.10"
+#define HOST_IP_ADDR "192.168.0.11"
 #elif defined(CONFIG_EXAMPLE_IPV6)
 #define HOST_IP_ADDR CONFIG_EXAMPLE_IPV6_ADDR
 #else
