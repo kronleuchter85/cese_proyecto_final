@@ -23,6 +23,9 @@
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
 
+#include "joystick_service.h"
+#include "robot_position_state.h"
+
 #define HOST_IP_ADDR CONFIG_EXAMPLE_IPV4_ADDR
 
 #define PORT CONFIG_EXAMPLE_PORT
@@ -38,8 +41,7 @@ static const char * MESSAGE_STOP = "STOP";
 
 
 
-static void udp_client_task(void *pvParameters)
-{
+static void udp_client_task(void *pvParameters){
     char rx_buffer[128];
     char host_ip[] = HOST_IP_ADDR;
     int addr_family = 0;
@@ -214,6 +216,27 @@ static void udp_client_task(void *pvParameters)
     }
     vTaskDelete(NULL);
 }
+
+
+void joystick_task(void * args){
+
+    joystick_initialize();
+
+    float reading_x ;
+    float reading_y ;
+
+    while (1) {
+
+        joystick_get_reading(&reading_x , &reading_y);
+
+        robot_position_state_update(reading_x , reading_y);
+
+        ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", reading_x , reading_y);
+
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
 
 void app_main(void)
 {
