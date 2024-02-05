@@ -25,8 +25,7 @@
 
 #define PORT CONFIG_EXAMPLE_PORT
 
-static const char *payload = "Status de los sensores";
-
+static const char *payload = "Temp: 24.5 - Hum: 44 - Luz: 66 - Pres: 720";
 
 static const char *TAG = "example";
 
@@ -73,9 +72,8 @@ static void udp_server_task(void *pvParameters)
 
 
         while (1) {
-            ESP_LOGI(TAG, "Waiting for data");
+            // ESP_LOGI(TAG, "Waiting for data");
             int len = recvfrom(sock, rx_buffer, sizeof(rx_buffer) - 1, 0, (struct sockaddr *)&source_addr, &socklen);
-            // Error occurred during receiving
             if (len < 0) {
                 ESP_LOGE(TAG, "recvfrom failed: errno %d", errno);
                 // break;
@@ -85,24 +83,15 @@ static void udp_server_task(void *pvParameters)
 
                 // procesamos el comando recibido
 
-                ESP_LOGI(TAG, "Socket bound, port %d", PORT);
-                // Get the sender's ip address as string
                 if (source_addr.ss_family == PF_INET) {
                     inet_ntoa_r(((struct sockaddr_in *)&source_addr)->sin_addr, addr_str, sizeof(addr_str) - 1);
                 } 
 
                 rx_buffer[len] = 0; // Null-terminate whatever we received and treat like a string...
-                ESP_LOGI(TAG, "Received %d bytes from %s:", len, addr_str);
-                ESP_LOGI(TAG, "%s", rx_buffer);
-
-                int err = sendto(sock, rx_buffer, len, 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
+                ESP_LOGI(TAG, "Received %d bytes from %s:%d - [%s]", len, addr_str , PORT , rx_buffer);
             }
 
-            ESP_LOGI(TAG, "Enviando status del sistema");
+            // ESP_LOGI(TAG, "Enviando status del sistema");
 
             int err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
             if (err < 0) {
