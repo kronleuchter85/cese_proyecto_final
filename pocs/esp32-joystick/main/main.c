@@ -24,7 +24,7 @@ void joystick_task(void * args){
 
         joystick_get_reading(&normalized_x , &normalized_y);
 
-        ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", normalized_x , normalized_y);
+        // ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", normalized_x , normalized_y);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
