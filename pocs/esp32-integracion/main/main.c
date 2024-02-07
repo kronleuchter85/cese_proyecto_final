@@ -271,8 +271,8 @@ void app_main(void){
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
     // UDP server - wifi init
-    // ESP_ERROR_CHECK(esp_netif_init());
-    // ESP_ERROR_CHECK(example_connect());
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(example_connect());
 
 
     //
@@ -289,6 +289,6 @@ void app_main(void){
     //
     // task UDP server
     //
-    // xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
+    xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
 
 }
