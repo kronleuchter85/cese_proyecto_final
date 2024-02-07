@@ -13,6 +13,7 @@
 #include "motors_service.h"
 #include "joystick_service.h"
 #include "robot_position_state.h"
+#include "measuring_state.h"
 
 // UDP server headers
 #include <sys/param.h>
@@ -23,9 +24,7 @@
 #include "lwip/sockets.h"
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
-
-
-
+#include <bmp280.h>
 
 
 // 
@@ -75,14 +74,16 @@ static void measuring_task(void *pvParameters) {
         if (measuring_service_get_pressure( &pressure,  &temp2, &hum2) != MEASURING_READING_SUCCESS) {
             ESP_LOGI(TAG, "Temperature/pressure reading failed\n");
         } else {
-            ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C", pressure, temp2);
+
+            measuring_state_set_pressure(pressure);
+            measuring_state_set_temperature(temp2);
         }    
 
-        for(int countdown = 10; countdown >= 0; countdown--) {
-            ESP_LOGI(TAG, "%d... ", countdown);
-            vTaskDelay(1000 / portTICK_PERIOD_MS);
-        }
-        ESP_LOGI(TAG, "Starting again!");
+        measuring_state_t state = measuring_state_get();
+        
+        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C", state.pressure, state.temperature);
+
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
@@ -107,7 +108,7 @@ void joystick_task(void * args){
 
         robot_position_state_update(action);
 
-        ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
+        // ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
@@ -140,27 +141,27 @@ void motors_task(void *arg) {
         switch (state)
         {
             case MOVING_FORWARD:
-                printf("MOVING_FORWARD ...\n");
+                // printf("MOVING_FORWARD ...\n");
                 motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
                 break;
             case MOVING_BACKWARD:
-                printf("MOVING_BACKWARD ...\n");
+                // printf("MOVING_BACKWARD ...\n");
                 motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
                 break;
             case ROTATE_LEFT:
-                printf("ROTATE_LEFT ...\n");
+                // printf("ROTATE_LEFT ...\n");
                 motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
                 break;
             case ROTATE_RIGHT:
-                printf("ROTATE_RIGHT ...\n");
+                // printf("ROTATE_RIGHT ...\n");
                 motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
                 break;
             default:
-                printf("default ...\n");
+                // printf("default ...\n");
                 motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
                 motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
                 break;
@@ -235,7 +236,7 @@ static void udp_server_task(void *pvParameters){
                 } 
 
                 rx_buffer[len] = 0;
-                ESP_LOGI(TAG, "Received %d bytes from %s:%d - [%s]", len, addr_str , PORT , rx_buffer);
+                // ESP_LOGI(TAG, "Received %d bytes from %s:%d - [%s]", len, addr_str , PORT , rx_buffer);
                 
                 //
                 // actualizamos el estado del robot
@@ -269,11 +270,14 @@ void app_main(void){
 
     ESP_ERROR_CHECK( nvs_flash_init() );
     ESP_ERROR_CHECK(esp_event_loop_create_default());
-
+    
+    // I2C init
+    //
+    ESP_ERROR_CHECK(i2cdev_init());
+    
     // UDP server - wifi init
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(example_connect());
-
 
     //
     // task del motor
@@ -285,10 +289,14 @@ void app_main(void){
     //
     xTaskCreate(joystick_task, "joystick_task", 4096, NULL, 5, NULL);
 
-
     //
     // task UDP server
     //
     xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
+    
+    //
+    // measuring task
+    //
+    xTaskCreate(measuring_task, "measuring_task", 4096, NULL, 5, NULL);
 
 }

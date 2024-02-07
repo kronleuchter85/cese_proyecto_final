@@ -14,8 +14,6 @@ typedef enum {
 } t_measuring_status;
 
 
-#define BMP_SDA_GPIO 18
-#define BMP_SCL_GPIO 19
 
 t_measuring_status measuring_services_init(void);
 

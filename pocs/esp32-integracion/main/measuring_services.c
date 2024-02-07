@@ -1,14 +1,18 @@
 #include "measuring_services.h"
-
+#include <string.h>
+#include <stdio.h>
 #include "dht.h"
 #include "bmp280.h"
 
+#define DHT_GPIO 2
+#define BMP_SDA_GPIO 18
+#define BMP_SCL_GPIO 19
 
 //
 // DHT11 consts
 //
 
-static const gpio_num_t dht_gpio = 2;
+static const gpio_num_t dht_gpio = DHT_GPIO;
 static const dht_sensor_type_t sensor_type = DHT_TYPE_DHT11;
 
 //
@@ -26,6 +30,8 @@ t_measuring_status measuring_services_init(void){
     if(bmp280_init_default_params(&params) != ESP_OK){
         return MEASURING_INITIALIZATION_ERROR;
     }
+
+    memset(&dev, 0, sizeof(bmp280_t));
     if(bmp280_init_desc(&dev, BMP280_I2C_ADDRESS_0, 0, BMP_SDA_GPIO, BMP_SCL_GPIO) != ESP_OK ){
         return MEASURING_INITIALIZATION_ERROR;
     }
