@@ -12,8 +12,7 @@
 #include "measuring_services.h"
 #include "motors_service.h"
 #include "joystick_service.h"
-#include "robot_position_state2.h"
-// #include "robot_position_state.h"
+#include "robot_position_state.h"
 
 // UDP server headers
 #include <sys/param.h>
@@ -93,24 +92,26 @@ static void measuring_task(void *pvParameters) {
 // Joystick
 // ---------------------------------------------------------------------------------------------------------
 //
-// void joystick_task(void * args){
+void joystick_task(void * args){
 
-//     joystick_initialize();
+    joystick_initialize();
 
-//     float reading_x ;
-//     float reading_y ;
+    int reading_x ;
+    int reading_y ;
 
-//     while (1) {
+    while (1) {
 
-//         joystick_get_reading(&reading_x , &reading_y);
+        joystick_get_reading(&reading_x , &reading_y);
 
-//         robot_position_state_update(reading_x , reading_y);
+        robot_position_t action = robot_position_state_get_action_by_coordinates(reading_x , reading_y);
 
-//         ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", reading_x , reading_y);
+        robot_position_state_update(action);
 
-//         vTaskDelay(1000 / portTICK_PERIOD_MS);
-//     }
-// }
+        ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
+
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
 
 //
 // ---------------------------------------------------------------------------------------------------------
@@ -239,7 +240,8 @@ static void udp_server_task(void *pvParameters){
                 //
                 // actualizamos el estado del robot
                 //
-                robot_position_state_update(rx_buffer);
+                robot_position_t action = robot_position_state_get_action_by_name(rx_buffer);
+                robot_position_state_update(action);
 
             }
 
@@ -269,8 +271,8 @@ void app_main(void){
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
     // UDP server - wifi init
-    ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(example_connect());
+    // ESP_ERROR_CHECK(esp_netif_init());
+    // ESP_ERROR_CHECK(example_connect());
 
 
     //
@@ -281,12 +283,12 @@ void app_main(void){
     //
     // task del joystick
     //
-    // xTaskCreate(joystick_task, "joystick_task", 4096, NULL, 5, NULL);
+    xTaskCreate(joystick_task, "joystick_task", 4096, NULL, 5, NULL);
 
 
     //
     // task UDP server
     //
-    xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
+    // xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
 
 }
