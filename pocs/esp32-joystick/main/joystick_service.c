@@ -38,7 +38,7 @@ static esp_adc_cal_characteristics_t adc1_chars_y;
 
 static const adc_bits_width_t WIDTH = ADC_WIDTH_BIT_11;
 
-void joystick_transform(float * x , float * y);
+void joystick_transform(int * x , int * y);
 
 
 void joystick_initialize(){
@@ -66,7 +66,7 @@ void joystick_initialize(){
 
 }
 
-void joystick_get_reading(float * read_x , float * read_y){
+void joystick_get_reading(int * read_x , int * read_y){
     int adc_reading_x = 0;
     int adc_reading_y = 0;
 
@@ -84,14 +84,14 @@ void joystick_get_reading(float * read_x , float * read_y){
     // ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", normalized_x , normalized_y);
     // *read_x = voltage_x / 1000;
     // *read_y = voltage_y / 1000;
-
-    *read_x = (float) normalized_x;
-    *read_y = (float) normalized_y;
-
+    
+    *read_x = normalized_x;
+    *read_y =  normalized_y;
+    
     joystick_transform(read_x , read_y);
+ 
 
-
-    ESP_LOGI("POC Joystick - Reading", " (%f , %f) ", *read_x , *read_y);
+    ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", *read_x , *read_y);
 }
 
 
@@ -99,18 +99,18 @@ void joystick_get_reading(float * read_x , float * read_y){
 // private functions
 //
 
-void joystick_transform(float * x , float * y){
-    if(*x == 0.0)
+void joystick_transform(int * x , int * y){
+    if(*x == 0)
         *x = READING_MIN;
-    else if(*x == 1.0)
+    else if(*x == 1)
         *x = READING_NEUTRAL;
-    else if(*x == 2.0)
+    else if(*x == 2)
         *x = READING_MAX;
 
-    if(*y == 2.0)
+    if(*y == 2)
         *y = READING_MAX;
-    else if(*y == 1.0)
+    else if(*y == 1)
         *y = READING_NEUTRAL;
-    else if( *y==0.0)
+    else if( *y==0)
         *y = READING_MIN;
 }

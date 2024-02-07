@@ -19,8 +19,8 @@ void joystick_task(void * args){
 
     while (1) {
 
-        float normalized_x ;
-        float normalized_y ;
+        int normalized_x ;
+        int normalized_y ;
 
         joystick_get_reading(&normalized_x , &normalized_y);
 

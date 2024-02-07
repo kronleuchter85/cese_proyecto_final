@@ -12,6 +12,6 @@
 
 void joystick_initialize();
 
-void joystick_get_reading(float * read_x , float * read_y);
+void joystick_get_reading(int * read_x , int * read_y);
 
 #endif
