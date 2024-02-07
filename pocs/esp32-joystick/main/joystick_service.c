@@ -67,26 +67,24 @@ void joystick_initialize(){
 }
 
 void joystick_get_reading(int * read_x , int * read_y){
-    int adc_reading_x = 0;
-    int adc_reading_y = 0;
 
     // adc2_get_raw((adc2_channel_t)channel_x, ADC_WIDTH_BIT_12, &adc_reading_x);
-    adc_reading_x =  adc1_get_raw((adc1_channel_t)channel_x);
-    int voltage_x = esp_adc_cal_raw_to_voltage(adc_reading_x, &adc1_chars_x);
+    int adc_reading_x =  adc1_get_raw((adc1_channel_t)channel_x);
+    // int voltage_x = esp_adc_cal_raw_to_voltage(adc_reading_x, &adc1_chars_x);
     
-    adc_reading_y =  adc1_get_raw((adc1_channel_t)channel_y);
-    int voltage_y = esp_adc_cal_raw_to_voltage(adc_reading_y, &adc1_chars_y);
+    int adc_reading_y =  adc1_get_raw((adc1_channel_t)channel_y);
+    // int voltage_y = esp_adc_cal_raw_to_voltage(adc_reading_y, &adc1_chars_y);
 
-    int normalized_x = adc_reading_x / 900;
-    int normalized_y = adc_reading_y / 900;
+    *read_x = adc_reading_x / 900;
+    *read_y = adc_reading_y / 900;
 
     // ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", adc_reading_x , adc_reading_y);
     // ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", normalized_x , normalized_y);
     // *read_x = voltage_x / 1000;
     // *read_y = voltage_y / 1000;
     
-    *read_x = normalized_x;
-    *read_y =  normalized_y;
+    // *read_x = normalized_x;
+    // *read_y =  normalized_y;
     
     joystick_transform(read_x , read_y);
  
@@ -101,16 +99,16 @@ void joystick_get_reading(int * read_x , int * read_y){
 
 void joystick_transform(int * x , int * y){
     if(*x == 0)
-        *x = READING_MIN;
+        *x = JOYSTICK_READING_MIN;
     else if(*x == 1)
-        *x = READING_NEUTRAL;
+        *x = JOYSTICK_READING_NEUTRAL;
     else if(*x == 2)
-        *x = READING_MAX;
+        *x = JOYSTICK_READING_MAX;
 
     if(*y == 2)
-        *y = READING_MAX;
+        *y = JOYSTICK_READING_MAX;
     else if(*y == 1)
-        *y = READING_NEUTRAL;
+        *y = JOYSTICK_READING_NEUTRAL;
     else if( *y==0)
-        *y = READING_MIN;
+        *y = JOYSTICK_READING_MIN;
 }

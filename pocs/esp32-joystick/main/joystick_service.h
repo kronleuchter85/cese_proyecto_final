@@ -3,9 +3,9 @@
 #ifndef JOYSTICK_SERVICE_H
 #define JOYSTICK_SERVICE_H
 
-#define READING_MAX 1
-#define READING_MIN -1
-#define READING_NEUTRAL 0
+#define JOYSTICK_READING_MAX 1
+#define JOYSTICK_READING_MIN -1
+#define JOYSTICK_READING_NEUTRAL 0
 
 
 #include <stdio.h>
