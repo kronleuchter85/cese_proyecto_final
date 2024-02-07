@@ -85,101 +85,123 @@ static void udp_client_task(void *pvParameters){
             //     break;
             // }
 
-            payload = MESSAGE_FORWARD;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
+            // payload = MESSAGE_FORWARD;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
                 
+            // }
+
+            // payload = MESSAGE_STOP;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+            // payload = MESSAGE_BACKWARD;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+            // payload = MESSAGE_STOP;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+            // payload = MESSAGE_LEFT;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+            // payload = MESSAGE_STOP;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+            // payload = MESSAGE_RIGHT;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+            // payload = MESSAGE_STOP;
+            // for(i=0; i<times ; i++){
+            //     err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            //     if (err < 0) {
+            //         ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+            //         break;
+            //     }
+
+            //     ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            //     vTaskDelay(5 / portTICK_PERIOD_MS);
+            // }
+
+
+            if(robot_position_state_get() == MOVING_FORWARD){
+                payload = MESSAGE_FORWARD;
+            }else if (robot_position_state_get() == MOVING_BACKWARD){
+                payload = MESSAGE_BACKWARD;
+            }else if (robot_position_state_get() == ROTATE_LEFT){
+                payload = MESSAGE_LEFT;
+            }else if (robot_position_state_get() == ROTATE_RIGHT){
+                payload = MESSAGE_RIGHT;
+            }else if (robot_position_state_get() == REST){
+                payload = MESSAGE_STOP;
             }
 
-            payload = MESSAGE_STOP;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
+            err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+            if (err < 0) {
+                ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
+                break;
             }
 
-            payload = MESSAGE_BACKWARD;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
-            }
-
-            payload = MESSAGE_STOP;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
-            }
-
-            payload = MESSAGE_LEFT;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
-            }
-
-            payload = MESSAGE_STOP;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
-            }
-
-            payload = MESSAGE_RIGHT;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
-            }
-
-            payload = MESSAGE_STOP;
-            for(i=0; i<times ; i++){
-                err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-                if (err < 0) {
-                    ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                    break;
-                }
-
-                ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
-                vTaskDelay(5 / portTICK_PERIOD_MS);
-            }
+            ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
+            vTaskDelay(5 / portTICK_PERIOD_MS);
 
 
             // int err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
@@ -217,25 +239,27 @@ static void udp_client_task(void *pvParameters){
     vTaskDelete(NULL);
 }
 
-
 void joystick_task(void * args){
 
     joystick_initialize();
 
-    float reading_x ;
-    float reading_y ;
+    int reading_x ;
+    int reading_y ;
 
     while (1) {
 
         joystick_get_reading(&reading_x , &reading_y);
 
-        robot_position_state_update(reading_x , reading_y);
+        robot_position_t action = robot_position_state_get_action_by_coordinates(reading_x , reading_y);
 
-        ESP_LOGI("POC Joystick", " (%.2f , %.2f) ", reading_x , reading_y);
+        robot_position_state_update(action);
+
+        ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
+
 
 
 void app_main(void)
@@ -249,6 +273,12 @@ void app_main(void)
      * examples/protocols/README.md for more information about this function.
      */
     ESP_ERROR_CHECK(example_connect());
+
+    //
+    // task del joystick
+    //
+    xTaskCreate(joystick_task, "joystick_task", 4096, NULL, 5, NULL);
+
 
     xTaskCreate(udp_client_task, "udp_client", 4096, NULL, 5, NULL);
 }
