@@ -65,8 +65,8 @@ static void measuring_task(void *pvParameters) {
     while(1) {
 
         if (measuring_service_get_temperature_and_humidity( &humidity, &temperature) == MEASURING_READING_SUCCESS) {
-            ESP_LOGI(TAG,"Humidity: %d%% Temp: %dC\n", humidity / 10, temperature / 10);
-            
+            // ESP_LOGI(TAG,"Humidity: %d%% Temp: %dC\n", humidity / 10, temperature / 10);
+            measuring_state_set_humidity(humidity/10);
         } else {
             ESP_LOGE(TAG,"Could not read data from sensor\n");
         }
@@ -81,7 +81,7 @@ static void measuring_task(void *pvParameters) {
 
         measuring_state_t state = measuring_state_get();
         
-        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C", state.pressure, state.temperature);
+        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C, Humidity: %.2f %%", state.pressure, state.temperature, state.humidity);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }

@@ -4,7 +4,7 @@
 #include "dht.h"
 #include "bmp280.h"
 
-#define DHT_GPIO 2
+#define DHT_GPIO 4
 #define BMP_SDA_GPIO 18
 #define BMP_SCL_GPIO 19
 
