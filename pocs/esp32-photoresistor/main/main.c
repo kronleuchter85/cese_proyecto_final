@@ -11,13 +11,13 @@
 #include "esp_adc_cal.h"
 #include <inttypes.h>
 
-#define PIN_ANALOG_IN   4           // A10, ADC2_CHANNEL_0
+// #define PIN_ANALOG_IN   4           // A10, ADC2_CHANNEL_0
 
 #define DEFAULT_VREF    1100        //Default vref
 #define NO_OF_SAMPLES   64          //Multisampling
 
 adc_channel_t channel = ADC_CHANNEL_0;      // ADC1:GPIO36, ADC2:GPIO4
-adc_unit_t unit = ADC_UNIT_2;               // ADC2
+adc_unit_t unit = ADC_UNIT_1;               // ADC2
 adc_atten_t atten = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
 
 esp_adc_cal_characteristics_t *adc_chars;
@@ -47,28 +47,30 @@ void app_main(void)
 
         int adc_reading = 0;
         //Multisampling
-        for (int i = 0; i < NO_OF_SAMPLES; i++) {
-            if (unit == ADC_UNIT_1) {
-                adc_reading += adc1_get_raw((adc1_channel_t)channel);
-            }
-            else {
-                int raw;
-                adc2_get_raw((adc2_channel_t)channel, ADC_WIDTH_BIT_12, &raw);
-                adc_reading += raw;
-            }
-        }
+        // for (int i = 0; i < NO_OF_SAMPLES; i++) {
+        //     if (unit == ADC_UNIT_1) {
+        //         adc_reading += adc1_get_raw((adc1_channel_t)channel);
+        //     }
+        //     else {
+        //         int raw;
+        //         adc2_get_raw((adc2_channel_t)channel, ADC_WIDTH_BIT_12, &raw);
+        //         adc_reading += raw;
+        //     }
+        // }
        
-        adc_reading /= NO_OF_SAMPLES;
+        // adc_reading /= NO_OF_SAMPLES;
+
+        adc_reading = adc1_get_raw((adc1_channel_t)channel);
         //Convert adc_reading to voltage in mV
         uint32_t voltage = esp_adc_cal_raw_to_voltage(adc_reading, adc_chars);
         //printf("Raw: %d\tVoltage: %dmV\n", adc_reading, voltage);
 
         double vol = voltage / 1000.0f;
-        double Rt = 10 * vol / (3.3 - vol); //calculate resistance value of thermistor
-        double tempK = 1 / (1 / (273.15 + 25) + log(Rt / 10) / 3950.0); //calculate temperature (Kelvin)
-        double tempC = tempK - 273.15;     //calculate temperature (Celsius)
+        // double Rt = 10 * vol / (3.3 - vol); //calculate resistance value of thermistor
+        // double tempK = 1 / (1 / (273.15 + 25) + log(Rt / 10) / 3950.0); //calculate temperature (Kelvin)
+        // double tempC = tempK - 273.15;     //calculate temperature (Celsius)
 
-        ESP_LOGI(TAG, "ADC value : %d ,Voltage : %.2f V, Temperature : %.2f C\n" , adc_reading, vol, tempC);
+        ESP_LOGI(TAG, "ADC value : %d ,Voltage : %.2f V\n" , adc_reading, vol);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }

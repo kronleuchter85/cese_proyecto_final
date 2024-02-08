@@ -33,7 +33,7 @@ static void measuring_task(void *pvParameters)
         if (bmp280_read_float(&dev, &temperature, &pressure, &humidity) != ESP_OK) {
             ESP_LOGI(TAG, "Temperature/pressure reading failed\n");
         } else {
-            ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C", pressure, temperature);
+            ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C, Humi: %.2f", pressure, temperature, humidity);
         }    
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);

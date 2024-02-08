@@ -20,7 +20,7 @@
 #include "dht.h"
 
 
-#define ONE_WIRE_GPIO 2
+#define ONE_WIRE_GPIO 4
 
 
 static const gpio_num_t dht_gpio = ONE_WIRE_GPIO;
@@ -29,6 +29,9 @@ static const char *TAG = "temp_collector";
 
 static void measuring_task(void *pvParameters) {
     
+
+    // gpio_set_direction(ONE_WIRE_GPIO,GPIO_MODE_INPUT);
+    // gpio_set_pull_mode(ONE_WIRE_GPIO , GPIO_PULLUP_ONLY);
     int16_t temperature = 0;
     int16_t humidity = 0;
 
@@ -42,11 +45,7 @@ static void measuring_task(void *pvParameters) {
             ESP_LOGE(TAG,"Could not read data from sensor\n");
         }
 
-        for(int countdown = 10; countdown >= 0; countdown--) {
-            ESP_LOGI(TAG, "%d... ", countdown);
-            vTaskDelay(1000 / portTICK_PERIOD_MS);
-        }
-        ESP_LOGI(TAG, "Starting again!");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
