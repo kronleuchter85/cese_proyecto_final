@@ -8,10 +8,11 @@
 //
 // ADC1 - fotoresistor
 //
-
-static adc_channel_t channel = ADC_CHANNEL_0;      // ADC1:GPIO36, ADC2:GPIO4
-static adc_unit_t unit = ADC_UNIT_1;               // ADC2
-static adc_atten_t atten = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
+// ADC1:GPIO36
+static adc_channel_t channel = ADC_CHANNEL_0;      
+static adc_unit_t unit = ADC_UNIT_1;               
+// Full scale 0-3.9V, precision range 150mV-2450mV
+static adc_atten_t atten = ADC_ATTEN_DB_11;        
 static esp_adc_cal_characteristics_t adc_chars;
 static esp_adc_cal_value_t val_type;
 

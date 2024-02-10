@@ -11,9 +11,6 @@
 #define BMP_SDA_GPIO 18
 #define BMP_SCL_GPIO 19
 
-//Default vref para el ADC1 - fotoresistor
-#define DEFAULT_VREF    1100        
-
 //
 // DHT11 consts
 //
@@ -31,11 +28,11 @@ static bmp280_t dev;
 // ADC1 - fotoresistor
 //
 
-static adc_channel_t channel = ADC_CHANNEL_0;      // ADC1:GPIO36, ADC2:GPIO4
-static adc_unit_t unit = ADC_UNIT_1;               // ADC2
-static adc_atten_t atten = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
-static esp_adc_cal_characteristics_t adc_chars;
-static esp_adc_cal_value_t val_type;
+// static adc_channel_t channel = ADC_CHANNEL_0;      // ADC1:GPIO36, ADC2:GPIO4
+// static adc_unit_t unit = ADC_UNIT_1;               // ADC2
+// static adc_atten_t atten = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
+// static esp_adc_cal_characteristics_t adc_chars;
+// static esp_adc_cal_value_t val_type;
 
 t_measuring_status measuring_services_init(void){
 

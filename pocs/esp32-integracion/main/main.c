@@ -62,16 +62,14 @@ static const char *TAG = "temp_collector";
 // ---------------------------------------------------------------------------------------------------------
 //
 static void measuring_task(void *pvParameters) {
-    
-    if(measuring_services_init() != MEASURING_INITIALIZATION_SUCCESS)
-        return;
 
     int16_t temperature = 0;
     int16_t humidity = 0;
     int light_reading = 0;
-
     float temp2 , hum2, pressure;
 
+    if(measuring_services_init() != MEASURING_INITIALIZATION_SUCCESS)
+        return;
 
     while(1) {
 
