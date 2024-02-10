@@ -3,10 +3,16 @@
 #include <stdio.h>
 #include "dht.h"
 #include "bmp280.h"
+#include "esp_adc_cal.h"
+#include "driver/adc.h"
+#include "adc_service.h"
 
 #define DHT_GPIO 4
 #define BMP_SDA_GPIO 18
 #define BMP_SCL_GPIO 19
+
+//Default vref para el ADC1 - fotoresistor
+#define DEFAULT_VREF    1100        
 
 //
 // DHT11 consts
@@ -18,19 +24,28 @@ static const dht_sensor_type_t sensor_type = DHT_TYPE_DHT11;
 //
 // BMP280
 //
-bmp280_params_t params;
-bmp280_t dev;
+static bmp280_params_t params;
+static bmp280_t dev;
+
+//
+// ADC1 - fotoresistor
+//
+
+static adc_channel_t channel = ADC_CHANNEL_0;      // ADC1:GPIO36, ADC2:GPIO4
+static adc_unit_t unit = ADC_UNIT_1;               // ADC2
+static adc_atten_t atten = ADC_ATTEN_DB_11;        // Full scale 0-3.9V, precision range 150mV-2450mV
+static esp_adc_cal_characteristics_t adc_chars;
+static esp_adc_cal_value_t val_type;
 
 t_measuring_status measuring_services_init(void){
 
     //
-    // inicializacion de modulos
+    // inicializacion del bmp280
     //
 
     if(bmp280_init_default_params(&params) != ESP_OK){
         return MEASURING_INITIALIZATION_ERROR;
     }
-
     memset(&dev, 0, sizeof(bmp280_t));
     if(bmp280_init_desc(&dev, BMP280_I2C_ADDRESS_0, 0, BMP_SDA_GPIO, BMP_SCL_GPIO) != ESP_OK ){
         return MEASURING_INITIALIZATION_ERROR;
@@ -38,6 +53,15 @@ t_measuring_status measuring_services_init(void){
     if(bmp280_init(&dev, &params)!= ESP_OK){
         return MEASURING_INITIALIZATION_ERROR;
     }
+
+
+    //
+    // inicializacion del ADC1 para el fotoresistor
+    //
+    // adc1_config_width(ADC_WIDTH_BIT_12);
+    // adc1_config_channel_atten((adc1_channel_t)channel, atten);
+    // esp_adc_cal_characterize(unit, atten, ADC_WIDTH_BIT_12, DEFAULT_VREF, &adc_chars);
+
 
     return MEASURING_INITIALIZATION_SUCCESS;
 }
@@ -78,3 +102,21 @@ t_measuring_status measuring_service_get_pressure( float * p,float * t,float * h
     }
 }
 
+t_measuring_status measuring_service_get_light_level(int * reading){
+
+    adc_service_light_read(reading);
+
+    // int adc_reading = adc1_get_raw((adc1_channel_t)channel);
+    // uint32_t voltage = esp_adc_cal_raw_to_voltage(adc_reading, &adc_chars);
+    // *reading = adc_reading;
+
+
+    // double vol = voltage / 1000.0f;
+    // double Rt = 10 * vol / (3.3 - vol); //calculate resistance value of thermistor
+    // double tempK = 1 / (1 / (273.15 + 25) + log(Rt / 10) / 3950.0); //calculate temperature (Kelvin)
+    // double tempC = tempK - 273.15;     //calculate temperature (Celsius)
+
+    // ESP_LOGI(TAG, "ADC value : %d ,Voltage : %.2f V\n" , adc_reading, vol);
+
+    return MEASURING_READING_SUCCESS;
+}

@@ -21,5 +21,6 @@ t_measuring_status measuring_service_get_temperature_and_humidity(int16_t * h, i
 
 t_measuring_status measuring_service_get_pressure(float * p ,float * h, float * t);
 
+t_measuring_status measuring_service_get_light_level(int * reading);
 
 #endif

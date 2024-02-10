@@ -25,6 +25,7 @@
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
 #include <bmp280.h>
+#include "adc_service.h"
 
 
 // 
@@ -46,6 +47,15 @@
 static const char *payload = "Temp: 24.5 - Hum: 44 - Luz: 66 - Pres: 720";
 static const char *TAG = "temp_collector";
 
+
+#define DISPLAY_SDA_PIN  21
+#define DISPLAY_SCL_PIN  22
+
+#define DISPLAY_LCD_ADDR 0x27
+#define DISPLAY_LCD_COLS 16
+#define DISPLAY_LCD_ROWS 2
+
+
 //
 // ---------------------------------------------------------------------------------------------------------
 // Measuring
@@ -58,6 +68,7 @@ static void measuring_task(void *pvParameters) {
 
     int16_t temperature = 0;
     int16_t humidity = 0;
+    int light_reading = 0;
 
     float temp2 , hum2, pressure;
 
@@ -67,6 +78,7 @@ static void measuring_task(void *pvParameters) {
         if (measuring_service_get_temperature_and_humidity( &humidity, &temperature) == MEASURING_READING_SUCCESS) {
             // ESP_LOGI(TAG,"Humidity: %d%% Temp: %dC\n", humidity / 10, temperature / 10);
             measuring_state_set_humidity(humidity/10);
+            measuring_state_set_temperature(temperature/ 10);
         } else {
             ESP_LOGE(TAG,"Could not read data from sensor\n");
         }
@@ -76,12 +88,19 @@ static void measuring_task(void *pvParameters) {
         } else {
 
             measuring_state_set_pressure(pressure);
-            measuring_state_set_temperature(temp2);
+            // measuring_state_set_temperature(temp2);
+        }    
+
+        if (measuring_service_get_light_level( &light_reading) != MEASURING_READING_SUCCESS) {
+            ESP_LOGI(TAG, "Light reading failed\n");
+        } else {
+            measuring_state_set_light((float)light_reading);
         }    
 
         measuring_state_t state = measuring_state_get();
         
-        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C, Humidity: %.2f %%", state.pressure, state.temperature, state.humidity);
+        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C, Humidity: %.2f %%, Light: %.2f"
+            , state.pressure, state.temperature, state.humidity , state.light);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
@@ -93,9 +112,9 @@ static void measuring_task(void *pvParameters) {
 // Joystick
 // ---------------------------------------------------------------------------------------------------------
 //
-void joystick_task(void * args){
+static void joystick_task(void * args){
 
-    joystick_initialize();
+    // joystick_initialize();
 
     int reading_x ;
     int reading_y ;
@@ -110,7 +129,7 @@ void joystick_task(void * args){
 
         // ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
 
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
@@ -119,13 +138,15 @@ void joystick_task(void * args){
 // Motors
 // ---------------------------------------------------------------------------------------------------------
 //
-void motors_task(void *arg) {
+static void motors_task(void *arg) {
 
     float duty_cicle_counter = 40.0;
 
     motors_initialize(MCPWM_UNIT_0 , MCPWM_TIMER_0 , GPIO_MCPWM0_A_OUT , GPIO_MCPWM0_B_OUT);
     motors_initialize(MCPWM_UNIT_1 , MCPWM_TIMER_1 , GPIO_MCPWM1_A_OUT , GPIO_MCPWM1_B_OUT);
-
+    
+    bool at_rest = false;
+    
     while (1){
 
         if(duty_cicle_counter > 60.0)
@@ -135,41 +156,47 @@ void motors_task(void *arg) {
         // printf("duty_cycle = %.2f\n" , duty_cicle_counter);
         // printf("---------------------------------------------------\n");
         
-        // robot_position_t state = robot_position_state_get();
         robot_position_t state = robot_position_state_get();
-
+        
         switch (state)
         {
             case MOVING_FORWARD:
                 // printf("MOVING_FORWARD ...\n");
                 motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                at_rest = false;
                 break;
             case MOVING_BACKWARD:
                 // printf("MOVING_BACKWARD ...\n");
                 motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                at_rest = false;
                 break;
             case ROTATE_LEFT:
                 // printf("ROTATE_LEFT ...\n");
                 motors_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_backward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                at_rest = false;
                 break;
             case ROTATE_RIGHT:
                 // printf("ROTATE_RIGHT ...\n");
                 motors_backward(MCPWM_UNIT_0, MCPWM_TIMER_0, duty_cicle_counter);
                 motors_forward(MCPWM_UNIT_1, MCPWM_TIMER_1, duty_cicle_counter);
+                at_rest = false;
                 break;
             default:
                 // printf("default ...\n");
-                motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
-                motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+                if(!at_rest){
+                    motors_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+                    motors_stop(MCPWM_UNIT_1, MCPWM_TIMER_1);
+                }
+                at_rest = true;
                 break;
         }
 
         // duty_cicle_counter = duty_cicle_counter + 10.0;
 
-        // vTaskDelay(500 / portTICK_RATE_MS);
+        vTaskDelay(100 / portTICK_RATE_MS);
     }
 }
 
@@ -254,6 +281,8 @@ static void udp_server_task(void *pvParameters){
                 break;
             }
 
+            vTaskDelay(100 / portTICK_PERIOD_MS);
+
         }
 
         if (sock != -1) {
@@ -279,10 +308,13 @@ void app_main(void){
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(example_connect());
 
+
+    adc_service_initialize();
+
     //
     // task del motor
     //
-    xTaskCreate(&motors_task, "motors_task", 4096, NULL, 5, NULL);
+    xTaskCreate(motors_task, "motors_task", 4096, NULL, 5, NULL);
 
     //
     // task del joystick
@@ -294,7 +326,6 @@ void app_main(void){
     //
     xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
     
-    //
     // measuring task
     //
     xTaskCreate(measuring_task, "measuring_task", 4096, NULL, 5, NULL);

@@ -6,6 +6,7 @@
 #include "joystick_service.h"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
+#include "adc_service.h"
 
 
 // GPIO 34 (ADC1)
@@ -38,8 +39,13 @@ void joystick_initialize(){
 
 void joystick_get_reading(int * read_x , int * read_y){
 
-    int adc_reading_x =  adc1_get_raw((adc1_channel_t)channel_x);
-    int adc_reading_y =  adc1_get_raw((adc1_channel_t)channel_y);
+    int adc_reading_x =  0;
+    int adc_reading_y =  0;
+
+    adc_service_joystick_read(&adc_reading_x , &adc_reading_y);
+
+    // int adc_reading_x =  adc1_get_raw((adc1_channel_t)channel_x);
+    // int adc_reading_y =  adc1_get_raw((adc1_channel_t)channel_y);
 
     *read_x = adc_reading_x / 900;
     *read_y = adc_reading_y / 900;
