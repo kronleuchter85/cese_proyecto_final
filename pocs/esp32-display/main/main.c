@@ -27,32 +27,33 @@ static void LCD_DemoTask(void* param){
         LCD_clearScreen();
         LCD_writeStr("16x2 I2C LCD");
         vTaskDelay(3000 / portTICK_RATE_MS);
+        // LCD_clearScreen();
+        // LCD_setCursor(0,0);
+        // LCD_writeStr("Lets Count 0-10!");
         LCD_clearScreen();
-        LCD_setCursor(0,0);
-        LCD_writeStr("Lets Count 0-10!");
+        
+        LCD_home();
+        LCD_setCursor(0, 0);
+        sprintf(num, "Temp: %.1f C", 23.5);
+        LCD_writeStr(num);
+        
+        LCD_setCursor(0, 1);
+        sprintf(num, "Hume: %d %%", 30);
+        LCD_writeStr(num);
+        
         vTaskDelay(3000 / portTICK_RATE_MS);
         LCD_clearScreen();
-        for (int i = 0; i <= 10; i++) {
 
-            LCD_home();
-            LCD_setCursor(0, 0);
-            sprintf(num, "T: %.1f C", 23.5);
-            LCD_writeStr(num);
-            
-            LCD_setCursor(8, 0);
-            sprintf(num, "H: %d %%", 30);
-            LCD_writeStr(num);
-            
-            LCD_setCursor(0, 1);
-            sprintf(num, "P: %.1f hP", 23.5);
-            LCD_writeStr(num);
-            
-            LCD_setCursor(8, 1);
-            sprintf(num, "L: %d %%", 30);
-            LCD_writeStr(num);
-            
-            vTaskDelay(1000 / portTICK_RATE_MS);
-        }
+        LCD_setCursor(0, 0);
+        sprintf(num, "Pres: %.1f hPa", 23.5);
+        LCD_writeStr(num);
+        
+        LCD_setCursor(0, 1);
+        sprintf(num, "Lumi: %d %%", 30);
+        LCD_writeStr(num);
+        
+        vTaskDelay(3000 / portTICK_RATE_MS);
+        
     }
 }
 
