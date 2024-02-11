@@ -63,10 +63,17 @@ static const char *TAG = "temp_collector";
 //
 static void measuring_task(void *pvParameters) {
 
+    // dht11
     int16_t temperature = 0;
     int16_t humidity = 0;
-    int light_reading = 0;
+    
+    //bmp280
     float temp2 , hum2, pressure;
+    
+    // photoresistor
+    int light_reading = 0;
+    int voltage = 0;
+    int ligh_level = 0;
 
     if(measuring_services_init() != MEASURING_INITIALIZATION_SUCCESS)
         return;
@@ -89,15 +96,15 @@ static void measuring_task(void *pvParameters) {
             // measuring_state_set_temperature(temp2);
         }    
 
-        if (measuring_service_get_light_level( &light_reading) != MEASURING_READING_SUCCESS) {
+        if (measuring_service_get_light_level( &light_reading, &voltage , &ligh_level) != MEASURING_READING_SUCCESS) {
             ESP_LOGI(TAG, "Light reading failed\n");
         } else {
-            measuring_state_set_light((float)light_reading);
+            measuring_state_set_light((float)ligh_level);
         }    
 
         measuring_state_t state = measuring_state_get();
         
-        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C, Humidity: %.2f %%, Light: %.2f"
+        ESP_LOGI(TAG, "Pressure: %.2f Pa, Temperature: %.2f C, Humidity: %.2f %%, Light: %.2f %%"
             , state.pressure, state.temperature, state.humidity , state.light);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);

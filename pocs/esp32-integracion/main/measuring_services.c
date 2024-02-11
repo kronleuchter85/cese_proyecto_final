@@ -7,9 +7,17 @@
 #include "driver/adc.h"
 #include "adc_service.h"
 
+#include "esp_log.h"
+
 #define DHT_GPIO 4
 #define BMP_SDA_GPIO 18
 #define BMP_SCL_GPIO 19
+
+#define PHOTORESISTOR_MIN_READING 0.0
+#define PHOTORESISTOR_MAX_READING 2050.0
+
+static const char *TAG = "temp_collector";
+
 
 //
 // DHT11 consts
@@ -99,21 +107,24 @@ t_measuring_status measuring_service_get_pressure( float * p,float * t,float * h
     }
 }
 
-t_measuring_status measuring_service_get_light_level(int * reading){
+t_measuring_status measuring_service_get_light_level(int * reading , int * voltage , int * ligh_level){
 
-    adc_service_light_read(reading);
+    adc_service_light_read(reading , voltage);
+
+
+    float level = (PHOTORESISTOR_MAX_READING - (float)*reading) / PHOTORESISTOR_MAX_READING;
+
+    *ligh_level = level*100;
 
     // int adc_reading = adc1_get_raw((adc1_channel_t)channel);
     // uint32_t voltage = esp_adc_cal_raw_to_voltage(adc_reading, &adc_chars);
     // *reading = adc_reading;
-
-
-    // double vol = voltage / 1000.0f;
+    // double vol = *voltage / 1000.0f;
     // double Rt = 10 * vol / (3.3 - vol); //calculate resistance value of thermistor
     // double tempK = 1 / (1 / (273.15 + 25) + log(Rt / 10) / 3950.0); //calculate temperature (Kelvin)
     // double tempC = tempK - 273.15;     //calculate temperature (Celsius)
 
-    // ESP_LOGI(TAG, "ADC value : %d ,Voltage : %.2f V\n" , adc_reading, vol);
+    ESP_LOGI(TAG, "Resistance: %d kOhm , Voltage: %d mV \n" , *reading, *voltage  );
 
     return MEASURING_READING_SUCCESS;
 }

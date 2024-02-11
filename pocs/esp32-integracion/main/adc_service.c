@@ -62,6 +62,8 @@ void adc_service_joystick_read(int * adc_reading_x , int * adc_reading_y){
 }
 
 
-void adc_service_light_read(int * reading){
+void adc_service_light_read(int * reading , int * voltage){
+
     *reading = adc1_get_raw((adc1_channel_t)channel);
+    *voltage = esp_adc_cal_raw_to_voltage(*reading, &adc_chars);
 }
