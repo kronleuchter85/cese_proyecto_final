@@ -26,6 +26,7 @@
 #include <lwip/netdb.h>
 #include <bmp280.h>
 #include "adc_service.h"
+#include "display_service.h"
 
 
 // 
@@ -47,14 +48,35 @@
 static const char *payload = "Temp: 24.5 - Hum: 44 - Luz: 66 - Pres: 720";
 static const char *TAG = "temp_collector";
 
+//
+// ---------------------------------------------------------------------------------------------------------
+// Display
+// ---------------------------------------------------------------------------------------------------------
+//
+static void display_task(void * args){
 
-#define DISPLAY_SDA_PIN  21
-#define DISPLAY_SCL_PIN  22
+    display_service_init();
 
-#define DISPLAY_LCD_ADDR 0x27
-#define DISPLAY_LCD_COLS 16
-#define DISPLAY_LCD_ROWS 2
+    char first_line[20];
+    char second_line[20];
 
+    while (true) {
+
+        measuring_state_t state = measuring_state_get();
+
+        sprintf(first_line, "Temp: %.1f C", state.temperature);
+        sprintf(second_line, "Hume: %.1f %%", state.humidity);
+
+        display_service_print(first_line , second_line);
+        vTaskDelay(3000 / portTICK_RATE_MS);
+
+        sprintf(first_line, "Pres: %.1f hPa", state.pressure);
+        sprintf(second_line, "Lumi: %.1f %%", state.light);
+        
+        display_service_print(first_line , second_line);
+        vTaskDelay(3000 / portTICK_RATE_MS);
+    }
+}
 
 //
 // ---------------------------------------------------------------------------------------------------------
@@ -101,6 +123,9 @@ static void measuring_task(void *pvParameters) {
         } else {
             measuring_state_set_light((float)ligh_level);
         }    
+
+        ESP_LOGI(TAG, "BMP280_Pressure: %.2f Pa, BMP280_Temperature: %.2f C, DHT11_Temperature: %d C, DHT11_Humidity: %d %%, Light: %d %%"
+            , pressure, temp2, temperature , humidity , ligh_level);
 
         measuring_state_t state = measuring_state_get();
         
@@ -305,16 +330,22 @@ void app_main(void){
     ESP_ERROR_CHECK( nvs_flash_init() );
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     
-    // I2C init
-    //
-    ESP_ERROR_CHECK(i2cdev_init());
-    
     // UDP server - wifi init
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(example_connect());
 
+    
+
+    // I2C init
+    //
+    ESP_ERROR_CHECK(i2cdev_init());
+    
 
     adc_service_initialize();
+
+    // display_service_init();
+    // measuring_services_init();
+
 
     //
     // task del motor
@@ -331,8 +362,15 @@ void app_main(void){
     //
     xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
     
+    //
     // measuring task
     //
     xTaskCreate(measuring_task, "measuring_task", 4096, NULL, 5, NULL);
+    
+
+    //
+    // display task
+    //
+    xTaskCreate(display_task, "display_task", 4096, NULL, 5, NULL);
 
 }

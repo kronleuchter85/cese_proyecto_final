@@ -44,6 +44,12 @@ static bmp280_t dev;
 
 t_measuring_status measuring_services_init(void){
 
+
+    // I2C init
+    //
+    // ESP_ERROR_CHECK(i2cdev_init());
+    
+
     //
     // inicializacion del bmp280
     //
