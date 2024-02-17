@@ -19,12 +19,12 @@ static esp_adc_cal_value_t val_type;
 //
 // joystick
 //
-// GPIO 34 (ADC1)
+// GPIO 34 (ADC1) - VRX
 static adc_channel_t channel_x =  ADC1_CHANNEL_6;      
 static adc_unit_t unit_x = ADC_UNIT_1;               
 static adc_atten_t atten_x = ADC_ATTEN_DB_11;        
 
-// GPIO 35 (ADC1)
+// GPIO 35 (ADC1) - VRY
 static adc_channel_t channel_y = ADC1_CHANNEL_7;      
 static adc_unit_t unit_y = ADC_UNIT_1;               
 static adc_atten_t atten_y = ADC_ATTEN_DB_11;        

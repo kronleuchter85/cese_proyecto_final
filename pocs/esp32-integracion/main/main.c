@@ -103,7 +103,6 @@ static void measuring_task(void *pvParameters) {
     while(1) {
 
         if (measuring_service_get_temperature_and_humidity( &humidity, &temperature) == MEASURING_READING_SUCCESS) {
-            // ESP_LOGI(TAG,"Humidity: %d%% Temp: %dC\n", humidity / 10, temperature / 10);
             measuring_state_set_humidity(humidity/10);
             measuring_state_set_temperature(temperature/ 10);
         } else {
@@ -114,8 +113,7 @@ static void measuring_task(void *pvParameters) {
             ESP_LOGI(TAG, "Temperature/pressure reading failed\n");
         } else {
 
-            measuring_state_set_pressure(pressure);
-            // measuring_state_set_temperature(temp2);
+            measuring_state_set_pressure(pressure/100);
         }    
 
         if (measuring_service_get_light_level( &light_reading, &voltage , &ligh_level) != MEASURING_READING_SUCCESS) {
@@ -157,7 +155,7 @@ static void joystick_task(void * args){
 
         robot_position_state_update(action);
 
-        // ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
+        ESP_LOGI("POC Joystick - Reading", " (%d , %d) ", reading_x , reading_y);
 
         vTaskDelay(100 / portTICK_PERIOD_MS);
     }
@@ -293,7 +291,7 @@ static void udp_server_task(void *pvParameters){
                 } 
 
                 rx_buffer[len] = 0;
-                // ESP_LOGI(TAG, "Received %d bytes from %s:%d - [%s]", len, addr_str , PORT , rx_buffer);
+                ESP_LOGI(TAG, "Received %d bytes from %s:%d - [%s]", len, addr_str , PORT , rx_buffer);
                 
                 //
                 // actualizamos el estado del robot
@@ -334,17 +332,11 @@ void app_main(void){
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(example_connect());
 
-    
-
     // I2C init
     //
     ESP_ERROR_CHECK(i2cdev_init());
     
-
     adc_service_initialize();
-
-    // display_service_init();
-    // measuring_services_init();
 
 
     //
