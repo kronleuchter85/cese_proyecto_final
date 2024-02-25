@@ -157,13 +157,29 @@ static void udp_client_task(void *pvParameters){
                 rx_buffer[len] = 0; 
                 ESP_LOGI(TAG, "Received %d bytes from %s: [%s]", len, host_ip , rx_buffer);
 
-                char * tokens = strtok(rx_buffer , " ");
-
-                measuring_state_set_temperature(atof(tokens[0]));        
-                measuring_state_set_humidity(atof(tokens[1]));        
-                measuring_state_set_light(atof(tokens[2]));        
-                measuring_state_set_pressure(atof(tokens[3]));        
+                char * val = NULL;
                 
+                val = strtok(rx_buffer, " ");
+                ESP_LOGI(TAG, "Parsed values [%s]", val);
+                float temperature = atof(val);
+
+                val = strtok(NULL, " ");
+                ESP_LOGI(TAG, "Parsed values [%s]", val);
+                float humidity = atof(val);
+                
+                val = strtok(NULL, " ");
+                ESP_LOGI(TAG, "Parsed values [%s]", val);
+                float light = atof(val);
+                
+                val = strtok(NULL, " ");
+                ESP_LOGI(TAG, "Parsed values [%s]", val);
+                float pressure = atof(val);
+
+                measuring_state_set_temperature(temperature);        
+                measuring_state_set_humidity(humidity);        
+                measuring_state_set_light(light);        
+                measuring_state_set_pressure(pressure);        
+
                 // if (strncmp(rx_buffer, "OK: ", 4) == 0) {
                 //     ESP_LOGI(TAG, "Received expected message, reconnecting");
                 //     break;
