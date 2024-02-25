@@ -234,22 +234,22 @@ static void motors_task(void *arg) {
 // ---------------------------------------------------------------------------------------------------------
 //
 
-static void udp_server_task(void *pvParameters){
+static void udp_server_task(void * pvParameters){
+    bool logging = (bool)pvParameters;
+
     char rx_buffer[128];
     char addr_str[128];
-    int addr_family = (int)pvParameters;
+    int addr_family = AF_INET;
     int ip_protocol = 0;
     struct sockaddr_in6 dest_addr;
 
     while (1) {
 
-        if (addr_family == AF_INET) {
-            struct sockaddr_in *dest_addr_ip4 = (struct sockaddr_in *)&dest_addr;
-            dest_addr_ip4->sin_addr.s_addr = htonl(INADDR_ANY);
-            dest_addr_ip4->sin_family = AF_INET;
-            dest_addr_ip4->sin_port = htons(PORT);
-            ip_protocol = IPPROTO_IP;
-        } 
+        struct sockaddr_in *dest_addr_ip4 = (struct sockaddr_in *)&dest_addr;
+        dest_addr_ip4->sin_addr.s_addr = htonl(INADDR_ANY);
+        dest_addr_ip4->sin_family = AF_INET;
+        dest_addr_ip4->sin_port = htons(PORT);
+        ip_protocol = IPPROTO_IP;
 
         int sock = socket(addr_family, SOCK_DGRAM, ip_protocol);
         if (sock < 0) {
@@ -339,30 +339,31 @@ void app_main(void){
     adc_service_initialize();
 
 
+
     //
     // task del motor
     //
-    xTaskCreate(motors_task, "motors_task", 4096, NULL, 5, NULL);
+    xTaskCreate(motors_task, "motors_task", 4096, (void*)true , 5, NULL);
 
     //
     // task del joystick
     //
-    xTaskCreate(joystick_task, "joystick_task", 4096, NULL, 5, NULL);
+    // xTaskCreate(joystick_task, "joystick_task", 4096, (void*)true , 5, NULL);
 
     //
     // task UDP server
     //
-    xTaskCreate(udp_server_task, "udp_server", 4096, (void*)AF_INET, 5, NULL);
+    xTaskCreate(udp_server_task, "udp_server", 4096, (void*)true , 5, NULL);
     
     //
     // measuring task
     //
-    xTaskCreate(measuring_task, "measuring_task", 4096, NULL, 5, NULL);
+    xTaskCreate(measuring_task, "measuring_task", 4096, (void*)true , 5, NULL);
     
 
     //
     // display task
     //
-    xTaskCreate(display_task, "display_task", 4096, NULL, 5, NULL);
+    // xTaskCreate(display_task, "display_task", 4096, (void*)true , 5, NULL);
 
 }

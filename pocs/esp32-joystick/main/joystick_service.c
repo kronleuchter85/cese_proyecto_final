@@ -8,12 +8,12 @@
 #include "esp_adc_cal.h"
 
 
-// GPIO 34 (ADC1)
+// GPIO 34 (ADC1) - VRX
 static adc_channel_t channel_x =  ADC1_CHANNEL_6;      
 static adc_unit_t unit_x = ADC_UNIT_1;               
 static adc_atten_t atten_x = ADC_ATTEN_DB_11;        
 
-// GPIO 0 (ADC2)
+// GPIO 0 (ADC2) - VRY
 // static adc_channel_t channel_x = ADC2_CHANNEL_1;      
 // static adc_unit_t unit_x = ADC_UNIT_2;               
 // static adc_atten_t atten_x = ADC_ATTEN_DB_11;        
