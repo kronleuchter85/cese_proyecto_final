@@ -3,7 +3,7 @@
 #include "robot_position_state.h"
 #include <string.h>
 
-robot_position_t position_state;
+robot_position_t position_state = REST;
 
 
 robot_position_t robot_position_state_get_action_by_name(char * cmd){
