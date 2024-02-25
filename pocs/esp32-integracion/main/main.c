@@ -46,7 +46,8 @@
 #define PORT 3333
 
 static const char *payload = "Temp: 24.5 - Hum: 44 - Luz: 66 - Pres: 720";
-static const char *payload2 = "Temp: %0.1f - Hum: %0.1f - Luz: %0.1f - Pres: %0.1f";
+static const char *payload2 = "%0.1f %0.1f %0.1f %0.1f";
+// static const char *payload2 = "Temp: %0.1f - Hum: %0.1f - Luz: %0.1f - Pres: %0.1f";
 
 static const char *TAG = "temp_collector";
 

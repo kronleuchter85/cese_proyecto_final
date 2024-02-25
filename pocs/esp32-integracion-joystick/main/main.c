@@ -6,8 +6,10 @@
    software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
    CONDITIONS OF ANY KIND, either express or implied.
 */
+#include <stdlib.h>
 #include <string.h>
 #include <sys/param.h>
+#include <bmp280.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -23,8 +25,10 @@
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
 
+#include "display_service.h"
 #include "joystick_service.h"
 #include "robot_position_state.h"
+#include "measuring_state.h"
 
 #define HOST_IP_ADDR CONFIG_EXAMPLE_IPV4_ADDR
 
@@ -39,6 +43,47 @@ static const char * MESSAGE_RIGHT = "ROTATE_RIGHT";
 static const char * MESSAGE_STOP = "STOP";
 
 
+
+//
+// ---------------------------------------------------------------------------------------------------------
+// Display
+// ---------------------------------------------------------------------------------------------------------
+//
+static void display_task(void * args){
+
+    display_service_init();
+
+    char first_line[20];
+    char second_line[20];
+
+    while (true) {
+
+        measuring_state_t state = measuring_state_get();
+
+        sprintf(first_line, "Temp: %.1f C", state.temperature);
+        sprintf(second_line, "Hume: %.1f %%", state.humidity);
+        // sprintf(first_line, "Temp: %.1f C", 21.1);
+        // sprintf(second_line, "Hume: %.1f %%", 25.5);
+
+        display_service_print(first_line , second_line);
+        vTaskDelay(3000 / portTICK_RATE_MS);
+
+        sprintf(first_line, "Pres: %.1f hPa", state.pressure);
+        sprintf(second_line, "Lumi: %.1f %%", state.light);
+        // sprintf(first_line, "Pres: %.1f hPa", 1000.0);
+        // sprintf(second_line, "Lumi: %.1f %%", 50.0);
+        
+        display_service_print(first_line , second_line);
+        vTaskDelay(3000 / portTICK_RATE_MS);
+    }
+}
+
+
+//
+// ---------------------------------------------------------------------------------------------------------
+// UDP Task
+// ---------------------------------------------------------------------------------------------------------
+//
 static void udp_client_task(void *pvParameters){
     char rx_buffer[128];
     char host_ip[] = HOST_IP_ADDR;
@@ -111,6 +156,13 @@ static void udp_client_task(void *pvParameters){
             else {
                 rx_buffer[len] = 0; 
                 ESP_LOGI(TAG, "Received %d bytes from %s: [%s]", len, host_ip , rx_buffer);
+
+                char * tokens = strtok(rx_buffer , " ");
+
+                measuring_state_set_temperature(atof(tokens[0]));        
+                measuring_state_set_humidity(atof(tokens[1]));        
+                measuring_state_set_light(atof(tokens[2]));        
+                measuring_state_set_pressure(atof(tokens[3]));        
                 
                 // if (strncmp(rx_buffer, "OK: ", 4) == 0) {
                 //     ESP_LOGI(TAG, "Received expected message, reconnecting");
@@ -132,6 +184,12 @@ static void udp_client_task(void *pvParameters){
     vTaskDelete(NULL);
 }
 
+
+//
+// ---------------------------------------------------------------------------------------------------------
+// Joystick Task
+// ---------------------------------------------------------------------------------------------------------
+//
 static void joystick_task(void * args){
 
     joystick_initialize();
@@ -163,6 +221,10 @@ void app_main(void){
 
     ESP_ERROR_CHECK(example_connect());
 
+    // I2C init
+    //
+    ESP_ERROR_CHECK(i2cdev_init());
+    
     //
     // task del joystick
     //
@@ -172,4 +234,10 @@ void app_main(void){
     // task del udp_server
     //
     xTaskCreate(udp_client_task, "udp_client", 4096, NULL, 5, NULL);
+
+
+    //
+    // display task
+    //
+    xTaskCreate(display_task, "display_task", 4096, (void*)true , 5, NULL);
 }
