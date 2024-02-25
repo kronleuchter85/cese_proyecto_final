@@ -50,15 +50,6 @@ static const char *payload2 = "Temp: %0.1f - Hum: %0.1f - Luz: %0.1f - Pres: %0.
 
 static const char *TAG = "temp_collector";
 
-static char *BODY_DEVICE = "id="DEVICE_ID"&n=%s&k=%s";
-static char *REQUEST_POST_REGISTER_DEVICE = "POST /device HTTP/1.0\r\n"
-    "Host: "API_IP_PORT"\r\n"
-    "User-Agent: "USER_AGENT"\r\n"
-    "Content-Type: application/x-www-form-urlencoded\r\n"
-    "Content-Length: %d\r\n"
-    "\r\n"
-    "%s";
-
 
 //
 // ---------------------------------------------------------------------------------------------------------
