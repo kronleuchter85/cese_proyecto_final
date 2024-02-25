@@ -46,7 +46,19 @@
 #define PORT 3333
 
 static const char *payload = "Temp: 24.5 - Hum: 44 - Luz: 66 - Pres: 720";
+static const char *payload2 = "Temp: %0.1f - Hum: %0.1f - Luz: %0.1f - Pres: %0.1f";
+
 static const char *TAG = "temp_collector";
+
+static char *BODY_DEVICE = "id="DEVICE_ID"&n=%s&k=%s";
+static char *REQUEST_POST_REGISTER_DEVICE = "POST /device HTTP/1.0\r\n"
+    "Host: "API_IP_PORT"\r\n"
+    "User-Agent: "USER_AGENT"\r\n"
+    "Content-Type: application/x-www-form-urlencoded\r\n"
+    "Content-Length: %d\r\n"
+    "\r\n"
+    "%s";
+
 
 //
 // ---------------------------------------------------------------------------------------------------------
@@ -237,6 +249,8 @@ static void motors_task(void *arg) {
 static void udp_server_task(void * pvParameters){
     bool logging = (bool)pvParameters;
 
+    char body[256];
+
     char rx_buffer[128];
     char addr_str[128];
     int addr_family = AF_INET;
@@ -301,9 +315,12 @@ static void udp_server_task(void * pvParameters){
 
             }
 
-            // ESP_LOGI(TAG, "Enviando status del sistema");
+            measuring_state_t state = measuring_state_get();
 
-            int err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
+            sprintf(body, payload2, state.temperature  , state.humidity , state.light , state.pressure );
+            ESP_LOGI(TAG, "Sending status %s", body);
+
+            int err = sendto(sock, body, strlen(body), 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
             if (err < 0) {
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
                 break;

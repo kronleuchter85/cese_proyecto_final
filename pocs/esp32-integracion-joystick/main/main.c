@@ -69,6 +69,9 @@ static void udp_client_task(void *pvParameters){
         ESP_LOGI(TAG, "Socket created, sending to %s:%d", HOST_IP_ADDR, PORT);
 
 
+        struct sockaddr_storage source_addr;
+        socklen_t socklen = sizeof(source_addr);
+
         while (1) {
 
             char * payload = NULL;
@@ -88,11 +91,33 @@ static void udp_client_task(void *pvParameters){
                 payload = MESSAGE_STOP;
             }
 
+            //
+            // enviando commandos
+            //
             err = sendto(sock, payload, strlen(payload), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
             if (err < 0) {
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
                 break;
             }
+
+            //
+            // recibiendo status del robot
+            //
+            
+            int len = recvfrom(sock, rx_buffer, sizeof(rx_buffer) - 1, 0, (struct sockaddr *)&source_addr, &socklen);
+            if (len < 0) {
+                ESP_LOGE(TAG, "recvfrom failed: errno %d", errno);
+            }
+            else {
+                rx_buffer[len] = 0; 
+                ESP_LOGI(TAG, "Received %d bytes from %s: [%s]", len, host_ip , rx_buffer);
+                
+                // if (strncmp(rx_buffer, "OK: ", 4) == 0) {
+                //     ESP_LOGI(TAG, "Received expected message, reconnecting");
+                //     break;
+                // }
+            }
+
 
             ESP_LOGI(TAG, "Mensaje enviado [%s]", payload);
             vTaskDelay(5 / portTICK_PERIOD_MS);
