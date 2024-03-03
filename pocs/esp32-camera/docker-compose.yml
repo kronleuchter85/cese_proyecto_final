@@ -11,8 +11,7 @@ services:
 
   app:
     build: .
-    image: cese/poc-esp32-integracion
-    container_name: poc-esp32-integracion
+    image: cese/poc-esp32-camera
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     # depends_on: 
