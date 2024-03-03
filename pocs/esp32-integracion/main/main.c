@@ -49,7 +49,6 @@
 
 static const char *payload = "Temp: 24.5 - Hum: 44 - Luz: 66 - Pres: 720";
 static const char *payload2 = "%0.1f %0.1f %0.1f %0.1f";
-// static const char *payload2 = "Temp: %0.1f - Hum: %0.1f - Luz: %0.1f - Pres: %0.1f";
 
 static const char *TAG = "temp_collector";
 
@@ -335,7 +334,6 @@ static void udp_server_task(void * pvParameters){
 
 void app_main(void){
 
-    // ESP_ERROR_CHECK( nvs_flash_init() );
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
       ESP_ERROR_CHECK(nvs_flash_erase());
@@ -344,13 +342,12 @@ void app_main(void){
     ESP_ERROR_CHECK(ret);
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     ESP_ERROR_CHECK(esp_netif_init());
-    esp_netif_create_default_wifi_ap();
-    // UDP server - wifi init
-    // ESP_ERROR_CHECK(esp_netif_init());
-    // ESP_ERROR_CHECK(example_connect());
-
+    
+    //
+    // Wifi AP init
+    //
     ESP_LOGI(TAG, "ESP_WIFI_MODE_AP");
-    wifi_init_softap();
+    wifi_service_init_access_point();
 
     // I2C init
     //

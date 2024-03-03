@@ -18,21 +18,11 @@
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
-/* The examples use WiFi configuration that you can set via project configuration menu.
-
-   If you'd rather not, just change the below entries to strings with
-   the config you want - ie #define EXAMPLE_WIFI_SSID "mywifissid"
-*/
-
-// #define CONFIG_ESP_WIFI_SSID        "myssid"
-// #define CONFIG_ESP_WIFI_PASSWORD    "mypassword"
-#define CONFIG_ESP_WIFI_CHANNEL     1
-#define CONFIG_ESP_MAX_STA_CONN     4
 
 #define EXAMPLE_ESP_WIFI_SSID      CONFIG_EXAMPLE_WIFI_SSID
 #define EXAMPLE_ESP_WIFI_PASS      CONFIG_EXAMPLE_WIFI_PASSWORD
-#define EXAMPLE_ESP_WIFI_CHANNEL   CONFIG_ESP_WIFI_CHANNEL
-#define EXAMPLE_MAX_STA_CONN       CONFIG_ESP_MAX_STA_CONN
+#define EXAMPLE_ESP_WIFI_CHANNEL   1
+#define EXAMPLE_MAX_STA_CONN       4
 
 static const char *TAG = "wifi softAP";
 
@@ -40,22 +30,16 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
 {
     if (event_id == WIFI_EVENT_AP_STACONNECTED) {
         wifi_event_ap_staconnected_t* event = (wifi_event_ap_staconnected_t*) event_data;
-        // ESP_LOGI(TAG, "station %s join, AID=%d",
-        //          MAC2STR(event->mac), event->aid);
-        // ESP_LOGI(TAG, "station %s leave, AID=%d", event->mac, event->aid);
+        ESP_LOGI(TAG, "station %02X:%02X:%02X:%02X:%02X:%02X leave, AID=%d", MAC2STR(event->mac), event->aid);
     } else if (event_id == WIFI_EVENT_AP_STADISCONNECTED) {
         wifi_event_ap_stadisconnected_t* event = (wifi_event_ap_stadisconnected_t*) event_data;
-        // ESP_LOGI(TAG, "station %s leave, AID=%d",
-        //          MAC2STR(event->mac), event->aid);
-        // ESP_LOGI(TAG, "station %s leave, AID=%d", event->mac, event->aid);
+        ESP_LOGI(TAG, "station %02X:%02X:%02X:%02X:%02X:%02X leave, AID=%d", MAC2STR(event->mac), event->aid);
     }
 }
 
-void wifi_init_softap(void) {
+void wifi_service_init_access_point(void) {
 
-    // ESP_ERROR_CHECK(esp_netif_init());
-    // ESP_ERROR_CHECK(esp_event_loop_create_default());
-    // esp_netif_create_default_wifi_ap();
+    esp_netif_create_default_wifi_ap();
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
@@ -84,15 +68,3 @@ void wifi_init_softap(void) {
     ESP_LOGI(TAG, "wifi_init_softap finished. SSID:%s password:%s channel:%d", EXAMPLE_ESP_WIFI_SSID, EXAMPLE_ESP_WIFI_PASS, EXAMPLE_ESP_WIFI_CHANNEL);
 }
 
-// void app_main(void)
-// {
-//     esp_err_t ret = nvs_flash_init();
-//     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-//       ESP_ERROR_CHECK(nvs_flash_erase());
-//       ret = nvs_flash_init();
-//     }
-//     ESP_ERROR_CHECK(ret);
-
-//     ESP_LOGI(TAG, "ESP_WIFI_MODE_AP");
-//     wifi_init_softap();
-// }

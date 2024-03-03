@@ -1,2 +1,2 @@
 
-void wifi_init_softap(void) ;
+void wifi_service_init_access_point(void) ;
