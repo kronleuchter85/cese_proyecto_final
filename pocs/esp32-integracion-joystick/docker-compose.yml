@@ -11,7 +11,7 @@ services:
     build: .
     # depends_on: 
     #   - app_tests
-    image: cese/esp32-udp-client
+    image: cese/esp32-integracion-joystick
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     volumes:
