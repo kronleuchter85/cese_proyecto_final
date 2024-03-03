@@ -11,7 +11,7 @@ services:
 
   app:
     build: .
-    image: cese/poc-esp32-integracion-app
+    image: cese/poc-esp32-integracion
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     # depends_on: 
