@@ -81,9 +81,8 @@ static int s_retry_num = 0;
 /* FreeRTOS event group to signal when we are connected/disconnected */
 static EventGroupHandle_t s_wifi_event_group;
 
-static void wifi_event_handler(void *arg, esp_event_base_t event_base,
-                               int32_t event_id, void *event_data)
-{
+static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data) {
+
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_AP_STACONNECTED) {
         wifi_event_ap_staconnected_t *event = (wifi_event_ap_staconnected_t *) event_data;
         ESP_LOGI(TAG_AP, "Station "MACSTR" joined, AID=%d",
@@ -103,9 +102,10 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base,
     }
 }
 
-/* Initialize soft AP */
-esp_netif_t *wifi_init_softap(void)
-{
+//
+// incializacion del access point
+//
+esp_netif_t *wifi_init_softap(void) {
     esp_netif_t *esp_netif_ap = esp_netif_create_default_wifi_ap();
 
     wifi_config_t wifi_ap_config = {
@@ -134,9 +134,11 @@ esp_netif_t *wifi_init_softap(void)
     return esp_netif_ap;
 }
 
-/* Initialize wifi station */
-esp_netif_t *wifi_init_sta(void)
-{
+//
+// inicializacion de la wifi station
+//
+esp_netif_t *wifi_init_sta(void) {
+
     esp_netif_t *esp_netif_sta = esp_netif_create_default_wifi_sta();
 
     wifi_config_t wifi_sta_config = {
@@ -145,25 +147,19 @@ esp_netif_t *wifi_init_sta(void)
             .password = EXAMPLE_ESP_WIFI_STA_PASSWD,
             .scan_method = WIFI_ALL_CHANNEL_SCAN,
             .failure_retry_cnt = EXAMPLE_ESP_MAXIMUM_RETRY,
-            /* Authmode threshold resets to WPA2 as default if password matches WPA2 standards (pasword len => 8).
-             * If you want to connect the device to deprecated WEP/WPA networks, Please set the threshold value
-             * to WIFI_AUTH_WEP/WIFI_AUTH_WPA_PSK and set the password with length and format matching to
-            * WIFI_AUTH_WEP/WIFI_AUTH_WPA_PSK standards.
-             */
             .threshold.authmode = ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD,
             .sae_pwe_h2e = WPA3_SAE_PWE_BOTH,
         },
     };
 
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_sta_config) );
-
     ESP_LOGI(TAG_STA, "wifi_init_sta finished.");
 
     return esp_netif_sta;
 }
 
-void app_main(void)
-{
+void app_main(void){
+
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
@@ -202,7 +198,7 @@ void app_main(void)
 
     /* Initialize STA */
     ESP_LOGI(TAG_STA, "ESP_WIFI_MODE_STA");
-    esp_netif_t *esp_netif_sta = wifi_init_sta();
+    // esp_netif_t *esp_netif_sta = wifi_init_sta();
 
     /* Start WiFi */
     ESP_ERROR_CHECK(esp_wifi_start() );
@@ -232,7 +228,7 @@ void app_main(void)
     }
 
     /* Set sta as the default interface */
-    esp_netif_set_default_netif(esp_netif_sta);
+    // esp_netif_set_default_netif(esp_netif_sta);
 
     /* Enable napt on the AP netif */
     if (esp_netif_napt_enable(esp_netif_ap) != ESP_OK) {
