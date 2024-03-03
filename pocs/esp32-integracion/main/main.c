@@ -28,6 +28,8 @@
 #include "adc_service.h"
 #include "display_service.h"
 
+#include "wifi_service.h"
+
 
 // 
 // Motors configuration
@@ -72,13 +74,13 @@ static void display_task(void * args){
         sprintf(second_line, "Hume: %.1f %%", state.humidity);
 
         display_service_print(first_line , second_line);
-        vTaskDelay(3000 / portTICK_RATE_MS);
+        vTaskDelay(3000 / portTICK_PERIOD_MS);
 
         sprintf(first_line, "Pres: %.1f hPa", state.pressure);
         sprintf(second_line, "Lumi: %.1f %%", state.light);
         
         display_service_print(first_line , second_line);
-        vTaskDelay(3000 / portTICK_RATE_MS);
+        vTaskDelay(3000 / portTICK_PERIOD_MS);
     }
 }
 
@@ -228,7 +230,7 @@ static void motors_task(void *arg) {
 
         // duty_cicle_counter = duty_cicle_counter + 10.0;
 
-        vTaskDelay(100 / portTICK_RATE_MS);
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
@@ -237,7 +239,6 @@ static void motors_task(void *arg) {
 // UDP Server
 // ---------------------------------------------------------------------------------------------------------
 //
-
 static void udp_server_task(void * pvParameters){
     bool logging = (bool)pvParameters;
 
@@ -334,17 +335,26 @@ static void udp_server_task(void * pvParameters){
 
 void app_main(void){
 
-    ESP_ERROR_CHECK( nvs_flash_init() );
+    // ESP_ERROR_CHECK( nvs_flash_init() );
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+      ESP_ERROR_CHECK(nvs_flash_erase());
+      ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
     ESP_ERROR_CHECK(esp_event_loop_create_default());
-    
-    // UDP server - wifi init
     ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(example_connect());
+    esp_netif_create_default_wifi_ap();
+    // UDP server - wifi init
+    // ESP_ERROR_CHECK(esp_netif_init());
+    // ESP_ERROR_CHECK(example_connect());
+
+    ESP_LOGI(TAG, "ESP_WIFI_MODE_AP");
+    wifi_init_softap();
 
     // I2C init
     //
     ESP_ERROR_CHECK(i2cdev_init());
-    
     adc_service_initialize();
 
 
