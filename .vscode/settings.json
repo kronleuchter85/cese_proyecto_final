@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "sdkconfig.h": "c",
-        "inttypes.h": "c"
+        "inttypes.h": "c",
+        "string.h": "c",
+        "robot_position_state2.h": "c",
+        "robot_position_state.h": "c",
+        "measuring_services.h": "c",
+        "hd44780.h": "c"
     }
 }
