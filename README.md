@@ -1,6 +1,6 @@
 # Universidad de Buenos Aires - Especializacion en Sistemas Embebidos
-## Asignatura Desarrollo de Aplicaciones para IoT
 ## Trabajo Practico integrador
+## Robot de Exploracion Ambiental
 ### Alumno Gonzalo Carreno
 ========================================
 
