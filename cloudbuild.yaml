@@ -9,7 +9,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'tag'
-      - 'local-image-name'
+      - '${_IMAGE_NAME}'
       - 'gcr.io/cese-robot/${_IMAGE_NAME}:$BUILD_ID'
 
   - name: 'gcr.io/cloud-builders/docker'
