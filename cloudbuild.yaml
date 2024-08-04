@@ -11,12 +11,15 @@ steps:
       - 'tag'
       - '${_IMAGE_NAME}'
       - 'gcr.io/cese-robot/${_IMAGE_NAME}:$BUILD_ID'
+    waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}:$BUILD_ID']
+    waitFor: ['-']
 
 options:
   logging: CLOUD_LOGGING_ONLY
+  failure: FAIL_FAST
 
 images:
   - 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}:$BUILD_ID'
