@@ -4,14 +4,9 @@
 
 #include "mock_dht.h"
 #include "mock_bmp280.h"
-#include "mock_adc_service.h"
-// #include "mock_esp_log.h"
-#include "commons.h"
 
 extern bmp280_params_t params;
 extern bmp280_t dev;
-
-
 
 void test_measuring_services_init_Success(){
     bmp280_init_default_params_ExpectAndReturn(&params , ESP_OK);

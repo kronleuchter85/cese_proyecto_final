@@ -29,8 +29,8 @@ static const dht_sensor_type_t sensor_type = DHT_TYPE_DHT11;
 //
 // BMP280
 //
-bmp280_params_t params;
-bmp280_t dev;
+static bmp280_params_t params;
+static bmp280_t dev;
 
 //
 // ADC1 - fotoresistor

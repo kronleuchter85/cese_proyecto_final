@@ -50,8 +50,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include <driver/gpio.h>
 #include <stdint.h>
-#include "commons.h"
+#include "esp_err.h"
 
 /**
  * Sensor type

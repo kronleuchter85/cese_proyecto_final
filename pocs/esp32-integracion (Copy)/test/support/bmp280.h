@@ -47,9 +47,9 @@ extern "C" {
 
 
 #include <stdint.h>
-
+#include "esp_err.h"
 #include <stdbool.h>
-#include "commons.h"
+#include <driver/gpio.h>
 
 #define BMP280_I2C_ADDRESS_0  0x76 //!< I2C address when SDO pin is low
 #define BMP280_I2C_ADDRESS_1  0x77 //!< I2C address when SDO pin is high
