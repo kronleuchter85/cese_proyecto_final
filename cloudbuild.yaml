@@ -8,10 +8,15 @@ steps:
 
   # Opcional: Subir las imágenes a Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/[PROJECT_ID]/[IMAGE_NAME]:$BUILD_ID']
+    args: ['push', 'gcr.io/$PROJECT_ID/$IMAGE_NAME:$BUILD_ID']
 
 options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - 'gcr.io/[PROJECT_ID]/[IMAGE_NAME]:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/$IMAGE_NAME:$BUILD_ID'
+
+# substitutions:
+#   PROJECT_ID: "cese-robot"
+#   _IMAGE_NAME: "my-image"
+#   _SERVICE_ACCOUNT: "my-service-account"
