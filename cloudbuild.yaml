@@ -6,7 +6,12 @@ steps:
       - '-c'
       - 'cd pocs/esp32-integracion && docker-compose up'
 
-  # Opcional: Subir las imágenes a Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'tag'
+      - 'local-image-name'
+      - 'gcr.io/cese-robot/${_IMAGE_NAME}:$BUILD_ID'
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}:$BUILD_ID']
 
