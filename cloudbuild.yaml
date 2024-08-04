@@ -1,0 +1,21 @@
+steps:
+  # Cambiar al subdirectorio 'app' y construir las imágenes de Docker
+  - name: 'gcr.io/cloud-builders/docker-compose'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'cd pocs/esp32-integracion && docker-compose build'
+
+  # Opcional: Ejecutar los servicios en segundo plano
+  - name: 'gcr.io/cloud-builders/docker-compose'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'cd pocs/esp32-integracion && docker-compose up -d'
+
+  # Opcional: Subir las imágenes a Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/[PROJECT_ID]/[IMAGE_NAME]:$BUILD_ID']
+
+images:
+  - 'gcr.io/[PROJECT_ID]/[IMAGE_NAME]:$BUILD_ID'
