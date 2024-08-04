@@ -16,7 +16,7 @@ options:
 images:
   - 'gcr.io/$PROJECT_ID/$IMAGE_NAME:$BUILD_ID'
 
-# substitutions:
+substitutions:
 #   PROJECT_ID: "cese-robot"
-#   _IMAGE_NAME: "my-image"
+  _IMAGE_NAME: "cese/poc-esp32-integracion-test"
 #   _SERVICE_ACCOUNT: "my-service-account"
