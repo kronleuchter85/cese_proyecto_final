@@ -26,9 +26,9 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - 'poc-esp32-integracion'
+   - 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}:$BUILD_ID'
 
 substitutions:
 #   PROJECT_ID: "cese-robot"
-  _IMAGE_NAME: "poc-esp32-integracion"
+  _IMAGE_NAME: "cese/poc-esp32-integracion"
 #   _SERVICE_ACCOUNT: "my-service-account"
