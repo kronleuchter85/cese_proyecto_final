@@ -9,17 +9,17 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'tag'
-      - 'poc-esp32-integracion:latest'
+      - 'poc-esp32-integracion'
       - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:latest'
     waitFor: ['-']
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:$COMMIT_SHA']
-    waitFor: ['-']
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:$COMMIT_SHA']
+  #   waitFor: ['-']
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:latest']
-    waitFor: ['-']
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:latest']
+  #   waitFor: ['-']
 
 options:
   logging: CLOUD_LOGGING_ONLY
