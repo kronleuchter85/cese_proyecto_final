@@ -29,5 +29,5 @@ options:
 
 substitutions:
 #   PROJECT_ID: "cese-robot"
-  _IMAGE_NAME: "cese/poc-esp32-integracion-test"
+  _IMAGE_NAME: "poc-esp32-integracion"
 #   _SERVICE_ACCOUNT: "my-service-account"
