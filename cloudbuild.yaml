@@ -4,7 +4,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'cd pocs/esp32-integracion && docker-compose up --build --abort-on-container-exit --exit-code-from app_tests'
+      - 'cd pocs/esp32-integracion && docker-compose up --abort-on-container-exit --exit-code-from app_tests'
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
