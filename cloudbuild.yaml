@@ -4,7 +4,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'cd pocs/esp32-integracion && docker-compose build'
+      - 'cd pocs/esp32-integracion && docker-compose up'
 
   # - name: 'gcr.io/cloud-builders/docker'
   #   args:
