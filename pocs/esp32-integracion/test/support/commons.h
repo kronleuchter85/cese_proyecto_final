@@ -8,8 +8,8 @@ typedef enum{
 } esp_err_t;
 
 
-#define ESP_LOGI( tag, format, ... ) printf(format , __VA_OPT__(,) __VA_ARGS__)
-// #define ESP_LOGI(tag, format, ...) printf(format, ##__VA_ARGS__)
+// #define ESP_LOGI( tag, format, ... ) printf(format , __VA_OPT__(,) __VA_ARGS__)
+#define ESP_LOGI(tag, format, ...) printf(format, ##__VA_ARGS__)
 
 
 #endif
