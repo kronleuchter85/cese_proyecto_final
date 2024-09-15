@@ -9,16 +9,16 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'tag'
-      - '${_IMAGE_NAME}'
-      - 'europe-docker.pkg.dev/cese-robot/${_IMAGE_NAME}:latest'
+      - 'poc-esp32-integracion:latest'
+      - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:latest'
     waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-docker.pkg.dev/cese-robot/${_IMAGE_NAME}:$COMMIT_SHA']
+    args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:$COMMIT_SHA']
     waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-docker.pkg.dev/cese-robot/${_IMAGE_NAME}:latest']
+    args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:latest']
     waitFor: ['-']
 
 options:
