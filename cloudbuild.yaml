@@ -26,7 +26,7 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:$COMMIT_SHA'
+  - 'poc-esp32-integracion:$COMMIT_SHA'
 
 substitutions:
 #   PROJECT_ID: "cese-robot"
