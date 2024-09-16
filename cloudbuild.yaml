@@ -11,6 +11,7 @@ steps:
     args:
       - '-c'
       - 'cd pocs/esp32-integracion && docker-compose up --abort-on-container-exit --exit-code-from app_tests'
+    waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
@@ -20,10 +21,6 @@ steps:
       - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:$COMMIT_SHA'
     waitFor: ['-']
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'push'
-      - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:$COMMIT_SHA'
 
 
 options:
