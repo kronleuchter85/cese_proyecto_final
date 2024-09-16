@@ -1,11 +1,11 @@
 steps:
 
 
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: 'docker/compose:1.29.2'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker-compose --version'
+      - 'cd pocs/esp32-integracion && docker-compose build'
 
   # - name: 'gcr.io/cloud-builders/docker'
   #   entrypoint: 'bash'
