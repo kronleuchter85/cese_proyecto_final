@@ -1,16 +1,23 @@
 steps:
 
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'cd pocs/esp32-integracion && docker-compose build --abort-on-container-exit --exit-code-from app_tests'
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker images'
+      - 'docker-compose --version'
+
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   entrypoint: 'bash'
+  #   args:
+  #     - '-c'
+  #     - 'cd pocs/esp32-integracion && docker-compose build --abort-on-container-exit --exit-code-from app_tests'
+
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   entrypoint: 'bash'
+  #   args:
+  #     - '-c'
+  #     - 'docker images'
 
 
 options:
