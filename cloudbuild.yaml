@@ -14,6 +14,19 @@ steps:
       - '-c'
       - 'docker images'
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'tag'
+      - 'cese/poc-esp32-integracion:latest'
+      - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:$COMMIT_SHA'
+      
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'tag'
+      - 'cese/poc-esp32-integracion:latest'
+      - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:latest'
+
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
