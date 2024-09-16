@@ -4,31 +4,31 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
+      - 'cd pocs/esp32-integracion && docker-compose build'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
       - 'cd pocs/esp32-integracion && docker-compose up --abort-on-container-exit --exit-code-from app_tests'
 
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   entrypoint: 'bash'
-  #   args:
-  #     - 'tag'
-  #     - 'cese/poc-esp32-integracion'
-  #     - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:$COMMIT_SHA'
-  #   waitFor: ['-']
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - 'tag'
+      - 'cese/poc-esp32-integracion'
+      - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:$COMMIT_SHA'
+    waitFor: ['-']
 
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:$COMMIT_SHA']
-  #   waitFor: ['-']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion/poc-esp32-integracion:$COMMIT_SHA'
 
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['push', 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:latest']
-  #   waitFor: ['-']
 
 options:
   logging: CLOUD_LOGGING_ONLY
 
-# images:
-#    - 'europe-docker.pkg.dev/cese-robot/poc-esp32-integracion:$COMMIT_SHA'
 
 substitutions:
-#   PROJECT_ID: "cese-robot"
   _IMAGE_NAME: "cese/poc-esp32-integracion"
-#   _SERVICE_ACCOUNT: "my-service-account"
