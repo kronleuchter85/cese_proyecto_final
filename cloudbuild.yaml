@@ -1,11 +1,14 @@
 steps:
 
 
-  - name: 'docker/compose:1.29.2'
+  - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'cd pocs/esp32-integracion && docker-compose build'
+      - |
+        cd pocs/esp32-integracion
+        docker-compose build --no-cache --verbose
+        docker-compose up --abort-on-container-exit --exit-code-from app_tests --verbose
 
   # - name: 'gcr.io/cloud-builders/docker'
   #   entrypoint: 'bash'
