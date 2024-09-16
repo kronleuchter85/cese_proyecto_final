@@ -8,11 +8,11 @@ steps:
       - '-c'
       - 'cd pocs/esp32-integracion && docker-compose build && docker-compose up --abort-on-container-exit --exit-code-from app_tests'
 
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   entrypoint: 'bash'
-  #   args:
-  #     - '-c'
-  #     - 'docker images'
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker images'
 
 
 options:
