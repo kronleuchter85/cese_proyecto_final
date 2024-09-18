@@ -7,7 +7,7 @@ services:
     image: cese/poc-esp32-integracion
     volumes:
       - .:/project
-    command: ceedling
+    command: ceedling gcov:all utils:gcov
 
   # app:
   #   build: .
