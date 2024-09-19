@@ -14,6 +14,18 @@ services:
   #   build: .
   #   image: cese/poc-esp32-integracion
   #   container_name: poc-esp32-integracion
+  #   # devices:
+  #   #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+  #   depends_on: 
+  #     - app_tests
+  #   volumes:
+  #     - .:/project
+  #   command: idf.py clean build 
+
+  # app:
+  #   build: .
+  #   image: cese/poc-esp32-integracion
+  #   container_name: poc-esp32-integracion
   #   devices:
   #     - "/dev/ttyUSB0:/dev/ttyUSB0"
   #   # depends_on: 
