@@ -24,8 +24,6 @@
 
 // static const adc_bits_width_t WIDTH = ADC_WIDTH_BIT_11;
 
-void joystick_transform(int * x , int * y);
-
 
 void joystick_initialize(){
 
