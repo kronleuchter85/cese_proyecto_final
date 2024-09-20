@@ -29,11 +29,11 @@ static adc_channel_t channel_y = ADC1_CHANNEL_7;
 static adc_unit_t unit_y = ADC_UNIT_1;               
 static adc_atten_t atten_y = ADC_ATTEN_DB_11;        
 
+
+static adc_bits_width_t WIDTH = ADC_WIDTH_BIT_11;
+
 static esp_adc_cal_characteristics_t adc1_chars_x;
 static esp_adc_cal_characteristics_t adc1_chars_y;
-
-static const adc_bits_width_t WIDTH = ADC_WIDTH_BIT_11;
-
 
 void adc_service_initialize(){
 
