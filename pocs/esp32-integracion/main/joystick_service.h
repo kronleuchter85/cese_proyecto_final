@@ -13,7 +13,6 @@
 
 void joystick_transform(int * x , int * y);
 
-
 void joystick_initialize();
 
 void joystick_get_reading(int * read_x , int * read_y);
