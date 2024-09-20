@@ -1,7 +1,7 @@
 FROM espressif/idf:v4.4
 
-# ENV DEBIAN_FRONTEND=noninteractive
-# ENV TZ=America/New_York
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/New_York
 
 #
 # instalacion de ESP-IDF-LIB

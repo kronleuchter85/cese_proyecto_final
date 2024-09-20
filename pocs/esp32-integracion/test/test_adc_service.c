@@ -51,4 +51,15 @@ void test_adc_service_joystick_read(){
 }
 
 void test_adc_service_light_read(){
+
+    adc_channel_t channel = ADC_CHANNEL_0;      
+
+    int reading = 0;
+    int voltage = 0;
+    adc1_get_raw_ExpectAndReturn(channel , 1);
+    esp_adc_cal_raw_to_voltage_IgnoreAndReturn( 1);
+
+    adc_service_light_read(&reading,&voltage);
+    TEST_ASSERT_EQUAL(reading , 1);
+    TEST_ASSERT_EQUAL(voltage , 1);
 }
