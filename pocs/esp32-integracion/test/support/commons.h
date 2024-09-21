@@ -1,6 +1,8 @@
 #ifndef __COMMONS_H__
 #define __COMMONS_H__
 
+#include "stdlib.h"
+#include "stdio.h"
 typedef int gpio_num_t;
 
 typedef enum{

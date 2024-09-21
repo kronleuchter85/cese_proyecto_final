@@ -6,28 +6,12 @@
    software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
    CONDITIONS OF ANY KIND, either express or implied.
 */
-#include <string.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_system.h"
-#include "esp_wifi.h"
-#include "esp_event.h"
-#include "esp_log.h"
-#include "nvs_flash.h"
 
-#include "lwip/err.h"
-#include "lwip/sys.h"
-
-
-#define EXAMPLE_ESP_WIFI_SSID      CONFIG_EXAMPLE_WIFI_SSID
-#define EXAMPLE_ESP_WIFI_PASS      CONFIG_EXAMPLE_WIFI_PASSWORD
-#define EXAMPLE_ESP_WIFI_CHANNEL   1
-#define EXAMPLE_MAX_STA_CONN       4
+#include "wifi_service.h"
 
 static const char *TAG = "wifi softAP";
 
-static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
-{
+void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data){
     if (event_id == WIFI_EVENT_AP_STACONNECTED) {
         wifi_event_ap_staconnected_t* event = (wifi_event_ap_staconnected_t*) event_data;
         ESP_LOGI(TAG, "station %02X:%02X:%02X:%02X:%02X:%02X leave, AID=%d", MAC2STR(event->mac), event->aid);
