@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-12-06T15:27:55.984Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="2Y8zvm7lY3b32lSMsmEb" version="24.4.8" type="device" pages="19">
+<mxfile host="Electron" modified="2024-12-07T12:07:09.344Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="XcRV0WX0S9kWMvPEVM5M" version="24.4.8" type="device" pages="19">
   <diagram id="a3BkHm2jv3KeYrSayy0M" name="PerspectivaProducto">
     <mxGraphModel dx="271" dy="-426" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3082,7 +3082,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Copy of Conexionados" id="EhDQTR6cXxTA4aL7kpig">
-    <mxGraphModel dx="1096" dy="696" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="870" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="fiq1HUa69h4roelaYaYY-0" />
         <mxCell id="fiq1HUa69h4roelaYaYY-1" parent="fiq1HUa69h4roelaYaYY-0" />
@@ -3131,7 +3131,7 @@
         <mxCell id="fiq1HUa69h4roelaYaYY-13" value="GND" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
           <mxGeometry x="19.999999999999773" y="210" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="fiq1HUa69h4roelaYaYY-14" value="&lt;h1&gt;Pinout&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;DHT11_Pin = GPIO 2&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;BMP280_SCL = GPIO 19&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;BMP280_SDA = GPIO 18&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;ADC_Fot_Pin = (ADC_CHANNEL_0)&amp;nbsp;GPIO 4&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;ADC_Joystick_Y = ADC_CHANNEL_0 GPIO 4&lt;br&gt;&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;ADC_Joystick_X = ADC_CHANNEL_0 GPIO 4&lt;br&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
+        <mxCell id="fiq1HUa69h4roelaYaYY-14" value="&lt;h1&gt;Pinout&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;DHT11_Pin = GPIO 2&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;BMP280_SCL = GPIO 19&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;BMP280_SDA = GPIO 18&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;ADC_Fot_Pin = (ADC_CHANNEL_0)&amp;nbsp;GPIO 4&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;ADC_Joystick_Y = ADC_CHANNEL_0 GPIO 4&lt;br&gt;&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;text-align: center&quot;&gt;ADC_Joystick_X = ADC_CHANNEL_0 GPIO 4&lt;br&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
           <mxGeometry x="80" y="984" width="360" height="185" as="geometry" />
         </mxCell>
         <mxCell id="fiq1HUa69h4roelaYaYY-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" source="fiq1HUa69h4roelaYaYY-19" target="fiq1HUa69h4roelaYaYY-144" edge="1">
@@ -3306,7 +3306,7 @@
         <mxCell id="fiq1HUa69h4roelaYaYY-57" value="R = 10K&amp;nbsp;&lt;span class=&quot;LrzXr kno-fv wHYlTd z8gr9e&quot;&gt;Ω&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
           <mxGeometry x="606" y="395" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="fiq1HUa69h4roelaYaYY-61" value="Conexionado joystick&amp;nbsp;&lt;span&gt;analógico&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
+        <mxCell id="fiq1HUa69h4roelaYaYY-61" value="Conexionado joystick&amp;nbsp;&lt;span&gt;analógico&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
           <mxGeometry x="1198" y="60" width="289.5" height="30" as="geometry" />
         </mxCell>
         <mxCell id="fiq1HUa69h4roelaYaYY-62" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;VCC (5 V)&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
@@ -3581,7 +3581,7 @@
         <mxCell id="fiq1HUa69h4roelaYaYY-181" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.signal_sources.protective_earth;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
           <mxGeometry x="555.5000000000002" y="545" width="25" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="fiq1HUa69h4roelaYaYY-182" value="VCC&amp;nbsp;&lt;br&gt;externa&amp;nbsp; 8.4V" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
+        <mxCell id="fiq1HUa69h4roelaYaYY-182" value="VCC&amp;nbsp;&lt;br&gt;externa&amp;nbsp; 7.4V" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
           <mxGeometry x="317" y="695" width="39.7" height="30" as="geometry" />
         </mxCell>
         <mxCell id="fiq1HUa69h4roelaYaYY-183" value="In2 / In4" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="fiq1HUa69h4roelaYaYY-1" vertex="1">
