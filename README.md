@@ -22,4 +22,4 @@ docker-compose up
 ## Diagramas
 
 ### Diagrama en bloques de alto nivel
-![alt text](https://github.com/kronleuchter85/cese_proyecto_especializacion/images/software/arquitectura_software_global_v2.pdf )
+![alt text](https://github.com/kronleuchter85/cese_proyecto_especializacion/images/software/ProyectoFinal-Arquitecturav1_Presentacion.drawio.png )
