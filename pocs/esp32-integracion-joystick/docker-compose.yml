@@ -17,4 +17,5 @@ services:
     volumes:
       - .:/project
     command: idf.py clean build flash --port /dev/ttyUSB0
+    # command: idf.py monitor --port /dev/ttyUSB0
   
