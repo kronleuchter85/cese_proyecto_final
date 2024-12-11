@@ -9,3 +9,17 @@ Pasos para compilar y desplegar los diferentes prototipos
 Entrar al directorio de la prueba de concepto que se desee desplegar y ejecutar el comando:
 
 docker-compose up
+
+
+
+
+## Objetivo y descripción del proyecto
+
+
+
+
+
+## Diagramas
+
+### Diagrama en bloques de alto nivel
+![alt text](images/software/arquitectura_software_global_v2.pdf )
