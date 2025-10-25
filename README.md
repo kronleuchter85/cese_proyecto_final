@@ -9,7 +9,7 @@
 
 ## Presentación
 
-[![Ver video en YouTube](https://www.youtube.com/watch?v=BtA5rOqhmMM)
+[![Ver video en YouTube ](https://img.youtube.com/vi/BtA5rOqhmMM/hqdefault.jpg)](https://www.youtube.com/watch?v=BtA5rOqhmMM)
 
 ---
 ## Introducción
