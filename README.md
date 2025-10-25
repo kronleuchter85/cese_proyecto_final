@@ -48,6 +48,7 @@ Conexionado lógico del hardware del robot
 ### Despliegue de software
 
 La arquitectura de software del sistema está formada por el firmware del robot y el del joystick.
+![Robot - Vista frontal](images/software/ProyectoFinal-Arquitectura_Presentacion2.drawio.png)
 
 ---
 
