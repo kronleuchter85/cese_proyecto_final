@@ -1,9 +1,8 @@
 # Robot de Exploracion Ambiental
-- Marco académico:
-   - Universidad de Buenos Aires - Facultad de Ingeniería
-   - Carrera: Especializacion en Sistemas Embebidos
-- Proyecto integrador
-- Título del trabajo: 
+## Universidad de Buenos Aires - Facultad de Ingeniería
+## Proyecto integrador 
+- Carrera: Especializacion en Sistemas Embebidos
+- Título del trabajo: Robot de Exploracion Ambiental
 - Autor: Mg. Ing. Gonzalo Carreno
 
 
