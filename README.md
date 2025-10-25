@@ -37,7 +37,7 @@ Conexionado lógico del hardware del robot
 ![Robot - Vista frontal](images/product/all_perspectives_joystick.png)
 
 #### Perspectivas detalladas de los sub-componentes de hardware del joystick
-![Robot - Vista frontal](images/schematics/hardware-joystick-explicado.png)
+![Robot - Vista frontal](images/product/hardware-joystick-explicado.png)
 
 #### Conexionado lógico del hardware del joystick
 ![Robot - Vista frontal](images/schematics/Conexionado_Joystick_sketch.png)
