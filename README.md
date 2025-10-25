@@ -11,6 +11,14 @@
 
 [![Ver video en YouTube ](images/Presentacion.png)](https://www.youtube.com/watch?v=BtA5rOqhmMM)
 
+
+## Documentación
+- ![Planificación de projecto](docs/GdP_Carreno_Gonzalo_Vfinal.pdf)
+- ![Memoria final](docs/TTFB_Memoria_Gonzalo_Carreno.pdf)
+- ![Documentación técnica](docs/Documentacion%20tecnica.pdf)
+- ![Informe de avance](docs/Informe%20de%20Avance%20-%20Gonzalo%20Carreno.pdf)
+- ![Manual de usuario final](docs/Manual-De-Usuario-vFinal.pdf)
+
 ## Arquitectura de hardware del sistema
 
 El hardware implementado consta de dos componentes principales:
