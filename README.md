@@ -31,7 +31,7 @@ A continuación se pueden apreciar imágenes descriptivas de los mismos, así co
 
 
 #### Conexionado lógico del hardware del robot
-![Robot - Vista frontal](images/schematics/conexionado_completo_robot.pdf)
+![Robot - Vista frontal](images/schematics/Conexionado_Robot_sketch.png)
 
 ### Hardware del joystick
 
