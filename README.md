@@ -25,21 +25,22 @@ A continuación se pueden apreciar imágenes descriptivas de los mismos, así co
 #### Perspectivas del hardware del robot
 ![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
 
-#### Perspectivas detalladas de los sub-componentes de hardware del robot
+Perspectivas detalladas de los sub-componentes de hardware del robot
 ![Robot - Vista frontal](images/product/Hardware-Robot-Explicado2.png)
 ![Robot - Vista frontal](images/product/Hardware-Robot-Explicado.png)
 
-
-#### Conexionado lógico del hardware del robot
+Conexionado lógico del hardware del robot
 ![Robot - Vista frontal](images/schematics/Conexionado_Robot_sketch.png)
 
-### Hardware del joystick
 
-#### Perspectivas externas del joystick
+### Hardware del joystick
+![Robot - Vista frontal](images/product/all_perspectives_joystick.png)
 
 #### Perspectivas detalladas de los sub-componentes de hardware del joystick
+![Robot - Vista frontal](images/schematics/hardware-joystick-explicado.png)
 
 #### Conexionado lógico del hardware del joystick
+![Robot - Vista frontal](images/schematics/Conexionado_Joystick_sketch.png)
 
 
 
