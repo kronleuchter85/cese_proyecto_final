@@ -1,5 +1,8 @@
 # Robot de Exploracion Ambiental
-- Universidad de Buenos Aires - Especializacion en Sistemas Embebidos
+---
+## Especializacion en Sistemas Embebidos
+## Universidad de Buenos Aires - Facultad de Ingeniería
+---
 - Proyecto integrador
 - Mg. Ing. Gonzalo Carreno
 
