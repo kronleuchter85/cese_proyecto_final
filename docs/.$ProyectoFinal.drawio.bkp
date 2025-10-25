@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2025-10-05T12:18:37.595Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="W93Qqlip4lacCkivNaiT" version="24.4.8" type="device" pages="19">
+<mxfile host="Electron" modified="2025-10-12T20:50:14.608Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="RDOH7FVb8xyQOYmFJb6w" version="24.4.8" type="device" pages="19">
   <diagram id="a3BkHm2jv3KeYrSayy0M" name="PerspectivaProducto">
     <mxGraphModel dx="271" dy="-426" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -4197,26 +4197,62 @@
         <mxCell id="EG8bd8TJuva4HMNExPbz-26" value="HAL" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="930" y="940" width="240" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="bvl3YPNXZxZ6KUph9Oy8-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3lmYL7tmdcBhZY9V-a1P-1" target="3lmYL7tmdcBhZY9V-a1P-4">
+        <mxCell id="bvl3YPNXZxZ6KUph9Oy8-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="3lmYL7tmdcBhZY9V-a1P-1" target="3lmYL7tmdcBhZY9V-a1P-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3lmYL7tmdcBhZY9V-a1P-1" value="MQTT Connectivity" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="3lmYL7tmdcBhZY9V-a1P-1" value="MQTT Connectivity" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="50" y="120" width="140" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="3lmYL7tmdcBhZY9V-a1P-3" value="Geo-Position Service" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="3lmYL7tmdcBhZY9V-a1P-3" value="Geo-Position Service" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="240" y="50" width="140" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="3lmYL7tmdcBhZY9V-a1P-4" value="AWS IoT Core" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.aws_iot;fillColor=#5294CF;gradientColor=none;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="3lmYL7tmdcBhZY9V-a1P-4" value="AWS IoT Core" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.aws_iot;fillColor=#5294CF;gradientColor=none;fontStyle=1;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="-322.75" y="105.38" width="67.5" height="81" as="geometry" />
         </mxCell>
-        <mxCell id="3lmYL7tmdcBhZY9V-a1P-5" value="(MQTT topic: Readings)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3lmYL7tmdcBhZY9V-a1P-5" value="(MQTT topic: Readings)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-365" y="209.63" width="152" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="3lmYL7tmdcBhZY9V-a1P-6" value="AWS" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+        <mxCell id="3lmYL7tmdcBhZY9V-a1P-6" value="AWS" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
           <mxGeometry x="-390" y="2.5" width="225" height="367.5" as="geometry" />
         </mxCell>
-        <mxCell id="bvl3YPNXZxZ6KUph9Oy8-2" value="Send MQTT readings" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="bvl3YPNXZxZ6KUph9Oy8-2" value="Send MQTT readings" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-150" y="110" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-1" value="&lt;b&gt;Robot&amp;nbsp;&lt;/b&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;sketch=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="-43.75" width="430" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-2" value="" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="16.25" width="390" height="387.5" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-3" value="UDP Communication" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="333.75" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-4" value="Motors Service" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="333.75" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-5" value="ADC Service" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="253.75" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-6" value="Measuring Service" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="253.75" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-7" value="Robot Firmware&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1260" y="16.25" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-8" value="Robot Position State" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="176.25" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-9" value="Main-core" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="176.25" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-10" value="Measuring State" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="106.25" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-11" value="MQTT Connectivity" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="106.25" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IJFEJ37xGrOj4Rw_n8uN-12" value="Geo-Position Service" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;sketch=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="36.25" width="140" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2025-10-12T20:50:14.608Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="RDOH7FVb8xyQOYmFJb6w" version="24.4.8" type="device" pages="19">
+<mxfile host="Electron" modified="2025-10-25T11:20:34.247Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="E_j_zVhX-Fx03b6qfKXQ" version="24.4.8" type="device" pages="19">
   <diagram id="a3BkHm2jv3KeYrSayy0M" name="PerspectivaProducto">
     <mxGraphModel dx="271" dy="-426" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -448,7 +448,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Arquitectura General v2" id="WJvfQng-_DWAIe_PUbUu">
-    <mxGraphModel dx="1098" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2607" dy="1582" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="5DUBnUR_cEnpZ-9qEVk0-0" />
         <mxCell id="5DUBnUR_cEnpZ-9qEVk0-1" parent="5DUBnUR_cEnpZ-9qEVk0-0" />
