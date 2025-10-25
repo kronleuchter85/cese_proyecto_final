@@ -34,7 +34,8 @@ A continuación se pueden apreciar imágenes descriptivas de los mismos, así co
 ![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
 
 #### Detalle de sus componentes y módulos internos
-![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
+![Robot - Vista frontal](images/product/Hardware-Robot-Explicado2.png)
+![Robot - Vista frontal](images/product/Hardware-Robot-Explicado.png)
 
 
 
