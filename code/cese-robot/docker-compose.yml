@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  app_tests:
+    build: .
+    image: cese/poc-esp32-integracion
+    volumes:
+      - .:/project
+    command: ceedling 
+    # command: ceedling clean test:all gcov:all utils:gcov
+
+  # app:
+  #   build: .
+  #   image: cese/poc-esp32-integracion
+  #   container_name: poc-esp32-integracion
+  #   # devices:
+  #   #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+  #   depends_on: 
+  #     - app_tests
+  #   volumes:
+  #     - .:/project
+  #   command: idf.py clean build 
+
+  # app:
+  #   build: .
+  #   image: cese/poc-esp32-integracion
+  #   container_name: poc-esp32-integracion
+  #   devices:
+  #     - "/dev/ttyUSB0:/dev/ttyUSB0"
+  #   # depends_on: 
+  #   #   - app_tests
+  #   volumes:
+  #     - .:/project
+  #   command: idf.py clean build flash --port /dev/ttyUSB0
+  
