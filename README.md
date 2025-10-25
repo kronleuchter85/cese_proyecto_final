@@ -78,8 +78,6 @@ Hay ciertos módulos y componentes que son comunes a ambos firmwares:
 
 
 
-
-
 ## Despliegue físico y capas del sistema
 
 Con respecto al despliegue físico, tanto el firmware del **robot** como el del **joystick** corren sobre **ESP32**.  
@@ -103,11 +101,9 @@ A nivel de capas, el sistema se organiza en **cuatro capas principales**:
    Capa de abstracción de más bajo nivel, accedida por el sistema operativo **FreeRTOS** para el control del ESP32 y su hardware.
 
 
-### Diagrama de despliegue
-
 En el siguiente diagrama se puede apreciar una imagen del mismo:
 
-![Diagrama de despliegue físico y capas](ruta/a/la/imagen.png)
+![Algoritmos de tareas del Robot](images/software/ArqFisica.png)
 
 
 ### Algoritmos de funcionamiento
