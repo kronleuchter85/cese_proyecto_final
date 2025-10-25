@@ -7,9 +7,9 @@
 ![Despliegue de componentes](images/product/Robot_y_Joystick_1.png)
 
 
-## Presentación
+## Demo
 
-[![Ver video en YouTube ](https://img.youtube.com/vi/BtA5rOqhmMM/hqdefault.jpg)](https://www.youtube.com/watch?v=BtA5rOqhmMM)
+[![Ver video en YouTube ](images/Presentacion.png)](https://www.youtube.com/watch?v=BtA5rOqhmMM)
 
 ---
 ## Introducción
