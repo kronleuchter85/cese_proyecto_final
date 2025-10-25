@@ -1,10 +1,9 @@
-# Robot de Exploracion Ambiental
----
 ## Especializacion en Sistemas Embebidos
 ## Universidad de Buenos Aires - Facultad de Ingeniería
----
-- Proyecto integrador
-- Mg. Ing. Gonzalo Carreno
+## Proyecto integrador
+## Robot de Exploracion Ambiental
+
+- Autor: Mg. Ing. Gonzalo Carreno
 
 
 ![Despliegue de componentes](images/product/Robot_y_Joystick_1.png)
