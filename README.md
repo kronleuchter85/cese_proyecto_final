@@ -31,7 +31,12 @@ A continuación se pueden apreciar imágenes descriptivas de los mismos, así co
 ### Hardware del robot
 
 #### Perspectivas del hardware del robot
-![Robot - Vista frontal](images/product/all_perspectives_robot_arrows.png)
+![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
+
+#### Detalle de sus componentes y módulos internos
+![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
+
+
 
 #### Perspectivas detalladas de los sub-componentes de hardware del robot
 
