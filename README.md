@@ -3,6 +3,9 @@
 - Proyecto integrador
 - Mg. Ing. Gonzalo Carreno
 
+
+![Despliegue de componentes](images/product/Robot_y_Joystick_1.png)
+
 ---
 ## Introducción
 
