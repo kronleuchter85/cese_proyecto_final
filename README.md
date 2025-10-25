@@ -18,6 +18,36 @@ El presente documento tiene como objetivo documentar los aspectos técnicos del 
 
 ---
 
+
+## Arquitectura de hardware del sistema
+
+El hardware implementado consta de dos componentes principales:
+
+- **Joystick**
+- **Robot**
+
+A continuación se pueden apreciar imágenes descriptivas de los mismos, así como su diseño y partes internas:
+
+### Hardware del robot
+
+![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
+
+
+#### Perspectivas detalladas de los sub-componentes de hardware del robot
+
+#### Conexionado lógico del hardware del robot
+
+### Hardware del joystick
+
+#### Perspectivas externas del joystick
+
+#### Perspectivas detalladas de los sub-componentes de hardware del joystick
+
+#### Conexionado lógico del hardware del joystick
+
+
+
+
 ## Arquitectura de software del sistema
 
 ### Despliegue de software
@@ -142,38 +172,5 @@ En la siguiente imagen pueden apreciarse los **algoritmos en pseudocódigo** del
 
 ![Algoritmos de tareas del robot](ruta/a/la/imagen.png)
 
-
-## Hardware del sistema
-
-El hardware implementado consta de dos componentes principales:
-
-- **Joystick**
-- **Robot**
-
-A continuación se pueden apreciar imágenes descriptivas de los mismos, así como su diseño y partes internas:
-
-![Joystick](ruta/a/imagen-joystick.png)
-![Robot](ruta/a/imagen-robot.png)
-
-### Hardware del robot
-
-#### Perspectivas externas del robot
-
-En las siguientes imágenes se muestran las perspectivas externas del robot de exploración ambiental, donde pueden observarse los componentes principales de su estructura y disposición general.
-
-![Robot - Vista frontal](ruta/a/robot-frontal.png)
-
-
-#### Perspectivas detalladas de los sub-componentes de hardware del robot
-
-#### Conexionado lógico del hardware del robot
-
-### Hardware del joystick
-
-#### Perspectivas externas del joystick
-
-#### Perspectivas detalladas de los sub-componentes de hardware del joystick
-
-#### Conexionado lógico del hardware del joystick
 
 
