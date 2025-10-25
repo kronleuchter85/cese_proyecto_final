@@ -9,15 +9,7 @@
 ---
 ## Introducción
 
-El robot de exploración ambiental implementado consta de dos componentes principales:
-
-- **Joystick**
-- **Robot**
-
-El presente documento tiene como objetivo documentar los aspectos técnicos del diseño e implementación de la arquitectura de software y hardware del sistema formado por ambos componentes.
-
----
-
+....
 
 ## Arquitectura de hardware del sistema
 
@@ -33,15 +25,13 @@ A continuación se pueden apreciar imágenes descriptivas de los mismos, así co
 #### Perspectivas del hardware del robot
 ![Robot - Vista frontal](images/product/all_perspectives_robot_perspectivas.png)
 
-#### Detalle de sus componentes y módulos internos
+#### Perspectivas detalladas de los sub-componentes de hardware del robot
 ![Robot - Vista frontal](images/product/Hardware-Robot-Explicado2.png)
 ![Robot - Vista frontal](images/product/Hardware-Robot-Explicado.png)
 
 
-
-#### Perspectivas detalladas de los sub-componentes de hardware del robot
-
 #### Conexionado lógico del hardware del robot
+![Robot - Vista frontal](images/schematics/conexionado_completo_robot.pdf)
 
 ### Hardware del joystick
 
