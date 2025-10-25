@@ -11,11 +11,6 @@
 
 [![Ver video en YouTube ](images/Presentacion.png)](https://www.youtube.com/watch?v=BtA5rOqhmMM)
 
----
-## Introducción
-
-....
-
 ## Arquitectura de hardware del sistema
 
 El hardware implementado consta de dos componentes principales:
@@ -46,8 +41,6 @@ Conexionado lógico del hardware del robot
 
 #### Conexionado lógico del hardware del joystick
 ![Robot - Vista frontal](images/schematics/Conexionado_Joystick_sketch.png)
-
-
 
 
 ## Arquitectura de software del sistema
