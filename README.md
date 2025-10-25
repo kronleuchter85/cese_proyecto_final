@@ -45,46 +45,13 @@ Conexionado lógico del hardware del robot
 
 ## Arquitectura de software del sistema
 
-### Despliegue de software
 
-La arquitectura de software del sistema está formada por el firmware del robot y el del joystick.
-![Robot - Vista frontal](images/software/ProyectoFinal-Arquitectura_Presentacion2.drawio.png)
-
----
-
-### Firmware del robot
-
-El firmware del robot tiene internamente ciertos componentes de software específicos cuyos módulos no están disponibles en el firmware del joystick:
-
-- **Measuring Service**: componente de control de dispositivos y sensores para medir parámetros ambientales.  
-- **Motors Service**: componente de control del movimiento de los motores.
-
-### Firmware del joystick
-
-El firmware del joystick tiene a su vez ciertos componentes no disponibles en el firmware del robot:
-
-- **Display Service**: componente utilizado para el control y escritura en el dispositivo display por medio de I2C.  
-- **Joystick Service**: componente utilizado para el control y lectura de la palanca analógica del joystick para controlar el movimiento del robot.
-
-
-### Componentes comunes
-
-Hay ciertos módulos y componentes que son comunes a ambos firmwares:
-
-- **Measuring State**: componente de software que almacena el estado de las mediciones de parámetros ambientales en el robot y el joystick.  
-- **Robot Position State**: componente en el que se almacena el estado de la posición actual del robot tras recibir el último movimiento a realizar.  
-- **ADC Service**: componente que implementa el control del driver ADC disponible en ESP32 para la lectura de ciertos dispositivos, como por ejemplo el fotoresistor (en el robot) y el control analógico (en el joystick).  
-- **UDP Communication**: componente que implementa las operaciones comunes para la conexión Wi-Fi y comunicación UDP cliente servidor.
-
-
-
-## Despliegue físico y capas del sistema
+### Despliegue físico y capas del sistema
 
 Con respecto al despliegue físico, tanto el firmware del **robot** como el del **joystick** corren sobre **ESP32**.  
-En el caso del robot se utilizó un **ESP32-WROOM-32D**, y en el caso del joystick un **ESP32-WROOVER-B**.
+En el caso del robot se utilizó un **ESP32-WROOM-32D**, y en el caso del joystick un **ESP32-WROOVER-B**. En el siguiente diagrama se puede apreciar una imagen del mismo:
 
-
-### Capas principales del despliegue
+![Algoritmos de tareas del Robot](images/software/ArqFisica.png)
 
 A nivel de capas, el sistema se organiza en **cuatro capas principales**:
 
@@ -101,9 +68,28 @@ A nivel de capas, el sistema se organiza en **cuatro capas principales**:
    Capa de abstracción de más bajo nivel, accedida por el sistema operativo **FreeRTOS** para el control del ESP32 y su hardware.
 
 
-En el siguiente diagrama se puede apreciar una imagen del mismo:
+### Diseño del firmware del robot y del joystick
 
-![Algoritmos de tareas del Robot](images/software/ArqFisica.png)
+La arquitectura de software del sistema está formada por el firmware del robot y el del joystick.
+![Robot - Vista frontal](images/software/ProyectoFinal-Arquitectura_Presentacion2.drawio.png)
+
+El firmware del robot tiene internamente ciertos componentes de software específicos cuyos módulos no están disponibles en el firmware del joystick:
+
+- **Measuring Service**: componente de control de dispositivos y sensores para medir parámetros ambientales.  
+- **Motors Service**: componente de control del movimiento de los motores.
+
+Por su parte, el firmware del joystick tiene a su vez ciertos componentes no disponibles en el firmware del robot:
+
+- **Display Service**: componente utilizado para el control y escritura en el dispositivo display por medio de I2C.  
+- **Joystick Service**: componente utilizado para el control y lectura de la palanca analógica del joystick para controlar el movimiento del robot.
+
+Hay ciertos módulos y componentes que son comunes a ambos firmwares:
+
+- **Measuring State**: componente de software que almacena el estado de las mediciones de parámetros ambientales en el robot y el joystick.  
+- **Robot Position State**: componente en el que se almacena el estado de la posición actual del robot tras recibir el último movimiento a realizar.  
+- **ADC Service**: componente que implementa el control del driver ADC disponible en ESP32 para la lectura de ciertos dispositivos, como por ejemplo el fotoresistor (en el robot) y el control analógico (en el joystick).  
+- **UDP Communication**: componente que implementa las operaciones comunes para la conexión Wi-Fi y comunicación UDP cliente servidor.
+
 
 
 ### Algoritmos de funcionamiento
