@@ -114,7 +114,10 @@ En el siguiente diagrama se puede apreciar una imagen del mismo:
 
 En la siguiente imagen pueden apreciarse los **algoritmos en pseudocódigo** del funcionamiento de las tareas involucradas del Robot y del Joystick:
 
+#### Diagrama de procesos del Robot
 ![Algoritmos de tareas del Robot](images/software/ProyectoFinal-Algos_Robot.drawio.png)
+
+#### Diagrama de procesos del Joystick
 ![Algoritmos de tareas del joystick](images/software/ProyectoFinal-Algos_Joystickdrawio.png)
 
 
