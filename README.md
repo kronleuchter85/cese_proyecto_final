@@ -1,8 +1,9 @@
-## Especializacion en Sistemas Embebidos
-## Universidad de Buenos Aires - Facultad de Ingeniería
-## Proyecto integrador
-## Robot de Exploracion Ambiental
-
+# Robot de Exploracion Ambiental
+- Marco académico:
+   - Universidad de Buenos Aires - Facultad de Ingeniería
+   - Carrera: Especializacion en Sistemas Embebidos
+- Proyecto integrador
+- Título del trabajo: 
 - Autor: Mg. Ing. Gonzalo Carreno
 
 
